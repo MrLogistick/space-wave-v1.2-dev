@@ -11,7 +11,7 @@ public class ScenesView : EditorWindow
     void OnEnable()
     {
         trashIcon = EditorGUIUtility.IconContent("TreeEditor.Trash").image as Texture2D;
-        pencilIcon = EditorGUIUtility.IconContent("EditCollider").image as Texture2D;
+        pencilIcon = EditorGUIUtility.IconContent("editicon.sml").image as Texture2D;
     }
     
     [MenuItem("Window/Scenes View")]
@@ -32,6 +32,10 @@ public class ScenesView : EditorWindow
             menu.AddItem(new GUIContent("Create New Scene"), false, CreateScene);
             menu.ShowAsContext();
             ev.Use();
+
+            menu.AddItem(new GUIContent("Ping Scenes Folder"), false, PingScenesFolder);
+
+            menu.ShowAsContext();
         }
 
         // Scrolling & Scene IDs
@@ -43,13 +47,16 @@ public class ScenesView : EditorWindow
             string path = AssetDatabase.GUIDToAssetPath(guid);
             string name = Path.GetFileNameWithoutExtension(path);
 
+            EditorGUILayout.Space(2f);
+
             EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.Space(position.width * 0.02f);
 
             // Scene Name
-            GUILayout.Label(name, GUILayout.Width(position.width / 2));
+            GUILayout.Label(name, GUILayout.Width(position.width * 0.45f), GUILayout.Height(18));
 
             // Open Scene Button
-            if (GUILayout.Button("Open", GUILayout.Width(60)))
+            if (GUILayout.Button("Open", GUILayout.Width(position.width * 0.25f), GUILayout.Height(18)))
             {
                 if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                 {
@@ -57,16 +64,14 @@ public class ScenesView : EditorWindow
                 }
             }
 
-            GUILayoutOption[] dimensions = { GUILayout.Width(22), GUILayout.Height(18) };
-
             // Rename Scene Button
-            if (GUILayout.Button(new GUIContent(pencilIcon), dimensions))
+            if (GUILayout.Button(new GUIContent(pencilIcon), GUILayout.Width(position.width * 0.1f), GUILayout.Height(18)))
             {
                 RenameScene(path);
             }
 
             // Delete Scene Button
-            if (GUILayout.Button(new GUIContent(trashIcon), dimensions))
+            if (GUILayout.Button(new GUIContent(trashIcon), GUILayout.Width(position.width * 0.1f), GUILayout.Height(18)))
             {
                 DeleteScene(path);
             }
@@ -79,15 +84,45 @@ public class ScenesView : EditorWindow
 
     void CreateScene()
     {
-        var path = "Assets/Scenes/MyScene.unity";
-        var newScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects);
-        EditorSceneManager.SaveScene(newScene, path);
-        EditorSceneManager.OpenScene(path);
+        string name = EditorUtility.SaveFilePanel(
+            "Create New Scene",
+            Application.dataPath + "/Scenes",
+            "NewScene",
+            "unity"
+        );
+
+        if (!string.IsNullOrEmpty(name))
+        {
+            var newScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects);
+            EditorSceneManager.SaveScene(newScene, name);
+            EditorSceneManager.OpenScene(name);            
+        }
+
+
+
+        AssetDatabase.Refresh()
     }
 
     void RenameScene(string path)
     {
-        
+        string currentName = Path.GetFileNameWithoutExtension(path);
+
+        string newName = EditorUtility.SaveFilePanel(
+            "Rename Scene",
+            Path.GetDirectoryName(path),
+            currentName,
+            "unity"
+        );
+
+        if (string.IsNullOrEmpty(newName)) return;
+
+        if (newName.StartsWith(Application.dataPath)) {
+            newName = "Assets" + newName.Substring(Application.dataPath.Length);
+        }
+
+        AssetDatabase.MoveAsset(path, newName);
+        AssetDatabase.SaveAssets();
+        Repaint();
     }
 
     void DeleteScene(string path)
@@ -104,5 +139,13 @@ public class ScenesView : EditorWindow
                 EditorUtility.DisplayDialog("Error", "Failed to delete scene.", "OK");
             }
         }
+    }
+
+    void PingScenesFolder()
+    {
+        EditorUtility.FocusProjectWindow();
+        var folder = AssetDatabase.LoadAssetAtPath<Object>("Assets/Scenes");
+        Selection.activeObject = folder;
+        EditorGUIUtility.PingObject(folder);        
     }
 }
