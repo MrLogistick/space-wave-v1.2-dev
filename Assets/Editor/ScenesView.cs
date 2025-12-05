@@ -8,6 +8,8 @@ public class ScenesView : EditorWindow
     Texture2D trashIcon;
     Texture2D pencilIcon;
 
+    bool simple = false;
+
     void OnEnable()
     {
         trashIcon = EditorGUIUtility.IconContent("TreeEditor.Trash").image as Texture2D;
@@ -29,13 +31,13 @@ public class ScenesView : EditorWindow
         if (ev.type == EventType.ContextClick)
         {
             GenericMenu menu = new GenericMenu();
+            
+            menu.AddItem(new GUIContent("Simple Layout"), simple, () => { simple = !simple; } );
             menu.AddItem(new GUIContent("Create New Scene"), false, CreateScene);
-            menu.ShowAsContext();
-            ev.Use();
-
             menu.AddItem(new GUIContent("Ping Scenes Folder"), false, PingScenesFolder);
 
             menu.ShowAsContext();
+            ev.Use();
         }
 
         // Scrolling & Scene IDs
@@ -45,38 +47,51 @@ public class ScenesView : EditorWindow
         foreach (string guid in sceneGUIDs)
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
-            string name = Path.GetFileNameWithoutExtension(path);
+            string name = Path.GetFileNameWithoutExtension(path);           
 
-            EditorGUILayout.Space(2f);
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.Space(position.width * 0.02f);
-
-            // Scene Name
-            GUILayout.Label(name, GUILayout.Width(position.width * 0.45f), GUILayout.Height(18));
-
-            // Open Scene Button
-            if (GUILayout.Button("Open", GUILayout.Width(position.width * 0.25f), GUILayout.Height(18)))
+            if (simple)
             {
-                if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                if (GUILayout.Button(name, GUILayout.Width(position.width * 0.98f), GUILayout.Height(18)))
                 {
-                    EditorSceneManager.OpenScene(path);
+                    if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                    {
+                        EditorSceneManager.OpenScene(path);
+                    }
+                }                 
+            }
+            else
+            {
+                EditorGUILayout.Space(2);
+
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.Space(0);
+
+                // Scene Name
+                GUILayout.Label(name, GUILayout.Width(position.width * 0.45f), GUILayout.Height(18));
+
+                // Open Scene Button
+                if (GUILayout.Button("Open", GUILayout.Width(position.width * 0.25f), GUILayout.Height(18)))
+                {
+                    if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                    {
+                        EditorSceneManager.OpenScene(path);
+                    }
                 }
-            }
 
-            // Rename Scene Button
-            if (GUILayout.Button(new GUIContent(pencilIcon), GUILayout.Width(position.width * 0.1f), GUILayout.Height(18)))
-            {
-                RenameScene(path);
-            }
+                // Rename Scene Button
+                if (GUILayout.Button(new GUIContent(pencilIcon), GUILayout.Width(position.width * 0.1f), GUILayout.Height(18)))
+                {
+                    RenameScene(path);
+                }
 
-            // Delete Scene Button
-            if (GUILayout.Button(new GUIContent(trashIcon), GUILayout.Width(position.width * 0.1f), GUILayout.Height(18)))
-            {
-                DeleteScene(path);
-            }
+                // Delete Scene Button
+                if (GUILayout.Button(new GUIContent(trashIcon), GUILayout.Width(position.width * 0.1f), GUILayout.Height(18)))
+                {
+                    DeleteScene(path);
+                }
 
-            EditorGUILayout.EndHorizontal();
+                EditorGUILayout.EndHorizontal();
+            }
         }
 
         EditorGUILayout.EndScrollView();
@@ -98,9 +113,7 @@ public class ScenesView : EditorWindow
             EditorSceneManager.OpenScene(name);            
         }
 
-
-
-        AssetDatabase.Refresh()
+        AssetDatabase.Refresh();
     }
 
     void RenameScene(string path)
