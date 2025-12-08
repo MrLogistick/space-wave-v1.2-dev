@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5425719309383772742}
   - component: {fileID: 4373161108629501961}
+  - component: {fileID: -5678909274125028856}
   - component: {fileID: 1313619999060098166}
   m_Layer: 0
   m_Name: StandardShockwave
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8454822106055059802, guid: e4a6ce0d617bec74eb6f38b02ff41891, type: 3}
+  m_Sprite: {fileID: 5916437106365826864, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,6 +92,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &-5678909274125028856
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3896608378518660786}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!114 &1313619999060098166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,10 +147,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779d7f2063b2c794096a14ec7898fd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StandardShockwave
-  topSpeed: 5
+  topSpeed: 14
   acceleration: 5
+  initialSpeed: 7
+  scaleMultiplier: 1.003
   stages:
-  - {fileID: 4314488664829900077, guid: e4a6ce0d617bec74eb6f38b02ff41891, type: 3}
-  - {fileID: 352877625608232534, guid: e4a6ce0d617bec74eb6f38b02ff41891, type: 3}
-  - {fileID: -8454822106055059802, guid: e4a6ce0d617bec74eb6f38b02ff41891, type: 3}
-  lifetime: 5
+  - {fileID: -319973998632073395, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
+  - {fileID: 6553544311669025859, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
+  - {fileID: -3684992673652908049, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
+  - {fileID: 2124971384046444356, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
+  - {fileID: -325324466057986798, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
+  lifetime: 2.4

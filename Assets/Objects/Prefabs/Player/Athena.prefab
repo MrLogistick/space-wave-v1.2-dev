@@ -48,10 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 0.25
-  acceleration: 0.5
-  turnSpeed: 900
+  acceleration: 1
+  turnSpeed: 500
+  moveStatic: 0
   ship: {fileID: 8164502200515402645}
-  abilityScript: {fileID: 0}
+  ab: {fileID: 6096563017624949555}
 --- !u!114 &711989397416571418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +257,7 @@ GameObject:
   - component: {fileID: 5780903149233604598}
   - component: {fileID: 6901727129938219555}
   - component: {fileID: 896735451453522520}
+  - component: {fileID: 6096563017624949555}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -325,7 +327,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 2124064909, guid: 0689b3782d6ad9e4eabab45d65c3a6a1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -350,6 +352,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAnchor
   anchor: {fileID: 4460319189857470781}
+--- !u!114 &6096563017624949555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4870631668256222671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8edf8cb7a65084c98e5d07086c3b73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipAbility
+  ability: 0
+  initialBullets: 5
+  maxBullets: 5
+  bullet: {fileID: 3896608378518660786, guid: 867b412cb5fcd1943a3389616513a0d6, type: 3}
 --- !u!1 &6608289951071937890
 GameObject:
   m_ObjectHideFlags: 0

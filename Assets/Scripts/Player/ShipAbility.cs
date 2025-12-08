@@ -23,7 +23,7 @@ public class ShipAbility : MonoBehaviour
         if (bulletCount > 0 && ability)
         {
             ability = false;
-            Instantiate(bullet, shootPoint.position, Quaternion.identity);
+            Instantiate(bullet, shootPoint.position, bullet.transform.rotation);
         }
     }
 }

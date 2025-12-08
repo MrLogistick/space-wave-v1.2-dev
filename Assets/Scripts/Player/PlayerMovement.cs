@@ -3,13 +3,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] float moveSpeed;
     [SerializeField] float acceleration;
     float currentSpeed;
+
     float[] clampDir = { 0f, -90f };
     [SerializeField] float turnSpeed;
     float currentRot;
 
+    [Header("Systems")]
+    [SerializeField] bool frozen;
+    [SerializeField] float borderPosition;
     int gravity = -1;
 
     [SerializeField] Transform ship;
@@ -20,8 +25,15 @@ public class PlayerMovement : MonoBehaviour
         currentRot = ship.rotation.z;
     }
 
+    void Update()
+    {
+        if (Mathf.Abs(transform.position.y) >= borderPosition) { Die("Gravity"); }
+    }
+
     void FixedUpdate()
     {
+        if (frozen) return;
+
         currentSpeed += acceleration * gravity * Time.deltaTime;
         currentSpeed = Mathf.Clamp(currentSpeed, -moveSpeed, moveSpeed);
 
@@ -35,6 +47,11 @@ public class PlayerMovement : MonoBehaviour
         ship.rotation = Quaternion.Euler(0f, 0f, currentRot);
     }
 
-    public void FlipGravity(InputAction.CallbackContext context) { if (context.performed) gravity *= -1; }
-    public void ActivateAbility(InputAction.CallbackContext context) { if (context.performed && !ab.ability) ab.ability = true; }
+    void Die(string deathBy)
+    {
+        if (deathBy == "Gravity") { frozen = true; }
+    }
+
+    public void FlipGravity(InputAction.CallbackContext context) { if (context.performed && !frozen) gravity *= -1; }
+    public void ActivateAbility(InputAction.CallbackContext context) { if (context.performed && !ab.ability && !frozen) ab.ability = true; }
 }
