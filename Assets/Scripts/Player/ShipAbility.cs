@@ -10,20 +10,37 @@ public class ShipAbility : MonoBehaviour
 
     [SerializeField] GameObject bullet;
 
-    Transform shootPoint;
+    [SerializeField] Transform shootPoint;
+    [SerializeField] Transform secondShootPoint;
+    Transform currentPoint;
 
-    void Start()
-    {
-        shootPoint = GetComponentInChildren<Transform>();
+    [SerializeField] ShipType currentShip;
+    enum ShipType {
+        Athena,
+        Hermes,
+        Zeus,
+        Hephaetsus
+    }
+
+    void Start() {
         bulletCount = initialBullets;
     }
 
-    void Update()
-    {
-        if (bulletCount > 0 && ability)
-        {
+    void Update() {
+        switch (currentShip) {
+            case ShipType.Athena: // script in weapon
+                currentPoint = shootPoint;
+                break;
+            case ShipType.Hermes: // script in ship
+                currentPoint = (transform.rotation.z >= -45f)
+                    ? secondShootPoint : shootPoint;
+                break;
+        }
+
+        if (bulletCount > 0 && ability) {
             ability = false;
-            Instantiate(bullet, shootPoint.position, bullet.transform.rotation);
+            bulletCount--;
+            Instantiate(bullet, currentPoint.position, bullet.transform.rotation);
         }
     }
 }

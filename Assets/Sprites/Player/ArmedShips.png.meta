@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5286810400056d45935cb849fe00bd4
-      internalID: 1271079327
+      spriteID: 48248eb474e36274e81acdebd5e05521
+      internalID: -1495209640
       vertices: []
       indices: 
       edges: []
@@ -172,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72378f7b0e8fbd248a7f7d27d5c0a471
-      internalID: -1261860010
+      spriteID: 796c52bd6dda94d44875926526c02624
+      internalID: -1902116645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hephaestus
+      name: Hephaetsus
       rect:
         serializedVersion: 2
         x: 48
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc52035903b5a334287c4b6f7f9c95f6
-      internalID: -635586586
+      spriteID: efbe6080b1b31ae42b685bdfe92311c7
+      internalID: 89748465
       vertices: []
       indices: 
       edges: []
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06bfdde8698dce84bb78c1e1f5849381
-      internalID: 1951960414
+      spriteID: d8e1649806862fa4e995fb17786ca3e1
+      internalID: 1546425896
       vertices: []
       indices: 
       edges: []
@@ -238,8 +238,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58cf42dd64719ab44b9c1b5dba432393
-      internalID: -151197048
+      spriteID: 896461dfdea00a94eb29b72fc2376a56
+      internalID: -1100732657
       vertices: []
       indices: 
       edges: []
@@ -260,8 +260,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca87b62c5e0b9514c9be97df8c8ab66d
-      internalID: 2124064909
+      spriteID: 2626fead4e222fd47a1f7202c72fd910
+      internalID: -1371265711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hermes_Weapon
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0511f10d2096613499f844cd746db4cf
+      internalID: 1624944656
       vertices: []
       indices: 
       edges: []
@@ -270,7 +292,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 119be6996a2ffe3468ed359897b8104d
+    spriteID: 51bae08094fe06243b3a2539ed14a4b6
     internalID: 0
     vertices: []
     indices: 
@@ -280,13 +302,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ares: 1951960414
+      Ares: 1546425896
       Athena: 7665507898933729213
-      Athena-Ares_Weapon: 2124064909
-      Hephaestus: -635586586
-      Hermes: 1271079327
-      Zeus: -1261860010
-      Zeus_Weapon: -151197048
+      Athena-Ares_Weapon: -1371265711
+      Hephaetsus: 89748465
+      Hermes: -1495209640
+      Hermes_Weapon: 1624944656
+      Zeus: -1902116645
+      Zeus_Weapon: -1100732657
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
