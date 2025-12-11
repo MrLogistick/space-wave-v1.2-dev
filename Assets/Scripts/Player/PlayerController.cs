@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     float currentSpeed;
-    float[] clampDir = { 0f, -90f };
+    Vector2 clampDir = new Vector2(0f, -90f);
     float currentRot;
 
     bool frozen;
@@ -37,12 +37,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Mathf.Abs(transform.position.y) >= borderPosition) { Die("Gravity"); }
+        if (Mathf.Abs(transform.position.y) >= borderPosition && !frozen) { Die("Gravity"); }
 
-        // foreach (var trail in trails) {
-        //    var main = trail.main;
-        //  main.simulationSpeed += Time.deltaTime;
-        //}
+        if (frozen) {
+            coll.enabled = false;
+        
+            foreach (var trail in trails) {
+                var emission = trail.emission;
+                emission.enabled = false;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -52,7 +56,7 @@ public class PlayerController : MonoBehaviour
         currentSpeed += data.acceleration * gravity * Time.deltaTime;
         currentSpeed = Mathf.Clamp(currentSpeed, -data.moveSpeed, data.moveSpeed);
 
-        float targetRot = Mathf.Lerp(clampDir[0], clampDir[1], gravity * -1);
+        float targetRot = Mathf.Lerp(clampDir.x, clampDir.y, gravity * -1);
         currentRot = Mathf.MoveTowards(currentRot, targetRot, data.turnSpeed * Time.deltaTime);
 
         var newPos = transform.position;
@@ -62,20 +66,18 @@ public class PlayerController : MonoBehaviour
         ship.rotation = Quaternion.Euler(0f, 0f, currentRot);
     }
 
-    void Die(string deathBy)
-    {
-        if (deathBy == "Gravity") {
-            frozen = true;
-            foreach (var trail in trails) {
-                var emission = trail.emission;
-                emission.enabled = false;
-            }
+    void Die(string deathBy) {
+        frozen = true;
+        GameManager.instance.TriggerPostGame(deathBy);
+
+        if (deathBy.Contains("roid")) {
+            ship.gameObject.SetActive(false);
+            ability.gameObject.SetActive(false);
         }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
         var obj = other.gameObject;
-        print("Touchdown!");
         
         if (obj.CompareTag("Asteroid")) {
             Die("Asteroid");

@@ -1,0 +1,607 @@
+fileFormatVersion: 2
+guid: 95f1019b5b5c39f4083e2353611ca286
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3899586474302808663
+    second: FieldWarning_0
+  - first:
+      213: 2087903939943873310
+    second: FieldWarning_1
+  - first:
+      213: -8102138674588923120
+    second: FieldWarning_2
+  - first:
+      213: 1282716338811844309
+    second: FieldWarning_3
+  - first:
+      213: -8728445438285115118
+    second: FieldWarning_4
+  - first:
+      213: 2095856406063255183
+    second: FieldWarning_5
+  - first:
+      213: -3253395765307191791
+    second: FieldWarning_6
+  - first:
+      213: -3034102115319990906
+    second: FieldWarning_7
+  - first:
+      213: 2824004189870788697
+    second: FieldWarning_8
+  - first:
+      213: 8046411795554452167
+    second: FieldWarning_9
+  - first:
+      213: 8136659908370408143
+    second: FieldWarning_10
+  - first:
+      213: -9046054077668711417
+    second: FieldWarning_11
+  - first:
+      213: 1816064386975533156
+    second: FieldWarning_12
+  - first:
+      213: -3828375273902386237
+    second: FieldWarning_13
+  - first:
+      213: 7359312649918195739
+    second: FieldWarning_14
+  - first:
+      213: -2568011482997785702
+    second: FieldWarning_15
+  - first:
+      213: 1202528471006557996
+    second: FieldWarning_16
+  - first:
+      213: 4457420196563300617
+    second: FieldWarning_17
+  - first:
+      213: -2653104191837603878
+    second: FieldWarning_18
+  - first:
+      213: -533941015981069669
+    second: FieldWarning_19
+  - first:
+      213: 3105682565536109389
+    second: FieldWarning_20
+  - first:
+      213: 7409220311579950680
+    second: FieldWarning_21
+  - first:
+      213: -6556392723709765503
+    second: FieldWarning_22
+  - first:
+      213: 60676808359765051
+    second: FieldWarning_23
+  - first:
+      213: -1046532598685015922
+    second: FieldWarning_24
+  - first:
+      213: 3892010863686137115
+    second: FieldWarning_25
+  - first:
+      213: -2198602059363531730
+    second: FieldWarning_26
+  - first:
+      213: 4842546633824361807
+    second: FieldWarning_27
+  - first:
+      213: -8812998470573677379
+    second: FieldWarning_28
+  - first:
+      213: 5357100602503437952
+    second: FieldWarning_29
+  - first:
+      213: -8287145618348764050
+    second: FieldWarning_30
+  - first:
+      213: -8922644742936978239
+    second: FieldWarning_31
+  - first:
+      213: -7444030815636381897
+    second: FieldWarning_32
+  - first:
+      213: 5898420603921977214
+    second: FieldWarning_33
+  - first:
+      213: -1885946371878946049
+    second: FieldWarning_34
+  - first:
+      213: -1123061161998533722
+    second: FieldWarning_35
+  - first:
+      213: 2875125613448985165
+    second: FieldWarning_36
+  - first:
+      213: -4750820862332234900
+    second: FieldWarning_37
+  - first:
+      213: 3654592879220365374
+    second: FieldWarning_38
+  - first:
+      213: -1878023198243605351
+    second: FieldWarning_39
+  - first:
+      213: -3627392734600365825
+    second: FieldWarning_40
+  - first:
+      213: -4352283197753987435
+    second: FieldWarning_41
+  - first:
+      213: -8420247545070986102
+    second: FieldWarning_42
+  - first:
+      213: -3522971083528175069
+    second: FieldWarning_43
+  - first:
+      213: -8137240393220847790
+    second: FieldWarning_44
+  - first:
+      213: -497403218012491350
+    second: FieldWarning_45
+  - first:
+      213: 6812163610611836844
+    second: FieldWarning_46
+  - first:
+      213: -5743186422008216464
+    second: FieldWarning_47
+  - first:
+      213: -7942931756517251605
+    second: FieldWarning_48
+  - first:
+      213: -2923971025059243161
+    second: FieldWarning_49
+  - first:
+      213: 7505237563526804718
+    second: FieldWarning_50
+  - first:
+      213: 685641536346368263
+    second: FieldWarning_51
+  - first:
+      213: -2922988463190667772
+    second: FieldWarning_52
+  - first:
+      213: 7549224946385838111
+    second: FieldWarning_53
+  - first:
+      213: -2101155191788447080
+    second: FieldWarning_54
+  - first:
+      213: 1888327412674911079
+    second: FieldWarning_55
+  - first:
+      213: -2413176531745515492
+    second: FieldWarning_56
+  - first:
+      213: -6689728043031349144
+    second: FieldWarning_57
+  - first:
+      213: 7653522631619782376
+    second: FieldWarning_58
+  - first:
+      213: -8441373580181772569
+    second: FieldWarning_59
+  - first:
+      213: -2170318973872426014
+    second: FieldWarning_60
+  - first:
+      213: 4879380963758650993
+    second: FieldWarning_61
+  - first:
+      213: 233913341111970310
+    second: FieldWarning_62
+  - first:
+      213: 2430838305046819089
+    second: FieldWarning_63
+  - first:
+      213: 4595571535921095413
+    second: FieldWarning_64
+  - first:
+      213: -423395475970323838
+    second: FieldWarning_65
+  - first:
+      213: 8715291973949934545
+    second: FieldWarning_66
+  - first:
+      213: -8061326202469746799
+    second: FieldWarning_67
+  - first:
+      213: 8354611178630594265
+    second: FieldWarning_68
+  - first:
+      213: 6453349267903971530
+    second: FieldWarning_69
+  - first:
+      213: -9057259931750047711
+    second: FieldWarning_70
+  - first:
+      213: -4599971230277473575
+    second: FieldWarning_71
+  - first:
+      213: 4184219090706842028
+    second: FieldWarning_72
+  - first:
+      213: 1581075546864124356
+    second: FieldWarning_73
+  - first:
+      213: -3585767009818979460
+    second: FieldWarning_74
+  - first:
+      213: -2860496249315027797
+    second: FieldWarning_75
+  - first:
+      213: -3934445171020358131
+    second: FieldWarning_76
+  - first:
+      213: -3845378048027246178
+    second: FieldWarning_77
+  - first:
+      213: 4354275094931285487
+    second: FieldWarning_78
+  - first:
+      213: 7666444733017987626
+    second: FieldWarning_79
+  - first:
+      213: 702643767398000928
+    second: FieldWarning_80
+  - first:
+      213: -4538489788964184684
+    second: FieldWarning_81
+  - first:
+      213: 2480046147668961427
+    second: FieldWarning_82
+  - first:
+      213: 7848210478157961658
+    second: FieldWarning_83
+  - first:
+      213: -4977811467209057884
+    second: FieldWarning_84
+  - first:
+      213: -8671662356334773767
+    second: FieldWarning_85
+  - first:
+      213: -6529043476132647637
+    second: FieldWarning_86
+  - first:
+      213: 8954954109823114955
+    second: FieldWarning_87
+  - first:
+      213: -5118457168730940318
+    second: FieldWarning_88
+  - first:
+      213: 3404088663004965517
+    second: FieldWarning_89
+  - first:
+      213: 2797022085057298800
+    second: FieldWarning_90
+  - first:
+      213: 3902008490045070355
+    second: FieldWarning_91
+  - first:
+      213: -7257561277093759180
+    second: FieldWarning_92
+  - first:
+      213: -8052274137360522286
+    second: FieldWarning_93
+  - first:
+      213: -7120902570244604806
+    second: FieldWarning_94
+  - first:
+      213: 2840725036201500697
+    second: FieldWarning_95
+  - first:
+      213: 8759981324804728899
+    second: FieldWarning_96
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FieldWarning_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 112
+        width: 112
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ad534433c2e1e9c0800000000000000
+      internalID: -3899586474302808663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FieldWarning_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 112
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1b3e793299b9fc10800000000000000
+      internalID: 2087903939943873310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FieldWarning_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 112
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01b4c2c6dcb6f8f80800000000000000
+      internalID: -8102138674588923120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FieldWarning_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 112
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d6387ac6bf1dc110800000000000000
+      internalID: 1282716338811844309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FieldWarning_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 112
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21113a18e155ed680800000000000000
+      internalID: -8728445438285115118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FieldWarning_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 112
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8e80a70c4af51d10800000000000000
+      internalID: 2095856406063255183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FieldWarning_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 112
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11eca17e9cd99d2d0800000000000000
+      internalID: -3253395765307191791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FieldWarning_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 112
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68537149334b4e5d0800000000000000
+      internalID: -3034102115319990906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 83f065f35fd6fba4c8b08b7e3f8a537a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":112.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      FieldWarning_0: -3899586474302808663
+      FieldWarning_1: 2087903939943873310
+      FieldWarning_2: -8102138674588923120
+      FieldWarning_3: 1282716338811844309
+      FieldWarning_4: -8728445438285115118
+      FieldWarning_5: 2095856406063255183
+      FieldWarning_6: -3253395765307191791
+      FieldWarning_7: -3034102115319990906
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

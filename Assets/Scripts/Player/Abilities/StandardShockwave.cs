@@ -7,8 +7,11 @@ public class StandardShockwave : MonoBehaviour
     [SerializeField] float initialSpeed;
     float currentSpeed;
 
-    [Range(1.001f, 1.01f)]
+    [SerializeField] float initialSize;
+    [SerializeField] float maxScale;
     [SerializeField] float scaleMultiplier;
+    float currentScale;
+
     [SerializeField] Sprite[] stages;
 
     [SerializeField] float lifetime;
@@ -21,6 +24,7 @@ public class StandardShockwave : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         currentSpeed = initialSpeed;
+        transform.localScale = Vector3.one * initialSize;
     }
 
     void Update()
@@ -38,7 +42,9 @@ public class StandardShockwave : MonoBehaviour
             currentSpeed = Mathf.Clamp(currentSpeed, 0f, topSpeed);
             transform.position += Vector3.right * currentSpeed * Time.deltaTime;
 
-            transform.localScale *= scaleMultiplier;
+            currentScale += scaleMultiplier * Time.deltaTime;
+            currentScale = Mathf.Clamp(currentScale, 0f, maxScale);
+            transform.localScale = Vector3.one * currentScale;
         }
     }
 }
