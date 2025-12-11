@@ -1,8 +1,9 @@
+using UnityEngine.UI;
 using UnityEngine;
 
 public class ShipAbility : MonoBehaviour
 {
-    public bool ability;
+    public bool activated;
 
     [SerializeField] int initialBullets;
     [SerializeField] int maxBullets;
@@ -14,6 +15,9 @@ public class ShipAbility : MonoBehaviour
     [SerializeField] Transform secondShootPoint;
     Transform currentPoint;
 
+    [SerializeField] GameObject visual;
+    Image fill;
+
     [SerializeField] ShipType currentShip;
     enum ShipType {
         Athena,
@@ -24,6 +28,11 @@ public class ShipAbility : MonoBehaviour
 
     void Start() {
         bulletCount = initialBullets;
+
+        if (visual) {
+            Transform liveVisual = Instantiate(visual, GameObject.Find("MainCanvas").transform).transform;
+            fill = liveVisual.GetChild(0).GetComponent<Image>();
+        }
     }
 
     void Update() {
@@ -37,10 +46,19 @@ public class ShipAbility : MonoBehaviour
                 break;
         }
 
-        if (bulletCount > 0 && ability) {
-            ability = false;
+        if (activated) {
+            activated = false;
+
+            if (bulletCount <= 0) return;
+            
             bulletCount--;
             Instantiate(bullet, currentPoint.position, bullet.transform.rotation);
         }
+
+        fill.fillAmount = bulletCount / (float)maxBullets;
+    }
+
+    public void ChangeCountBy(int value) {
+        bulletCount += value;
     }
 }

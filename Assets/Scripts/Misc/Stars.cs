@@ -36,7 +36,7 @@ public class Stars : MonoBehaviour
         curve.MoveKey(0, key);
 
         // Speed
-        var main = ps.main;
-        main.simulationSpeed += Time.deltaTime * 0.1f;
+        // var main = ps.main;
+        // main.simulationSpeed += Time.deltaTime * 0.1f;
     }
 }

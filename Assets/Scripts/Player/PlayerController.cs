@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     float currentSpeed;
     float[] clampDir = { 0f, -90f };
@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     int gravity = -1;
 
     Transform ship;
-    ShipAbility ab;
+    ShipAbility ability;
     ParticleSystem[] trails;
     PolygonCollider2D coll;
 
@@ -24,9 +24,12 @@ public class PlayerMovement : MonoBehaviour
             enabled = false;
         } else {
             Instantiate(data.ship, transform);
-            ship = GetComponentInChildren<PrefabSetup>().ship;
-            ab = GetComponentInChildren<PrefabSetup>().ability;
-            trails = GetComponentInChildren<PrefabSetup>().trails;
+
+            var prefab = GetComponentInChildren<PrefabSetup>();
+            ship = prefab.ship;
+            ability = prefab.ability;
+            trails = prefab.trails;
+            coll = prefab.coll;
 
             currentRot = ship.rotation.z;
         }
@@ -70,6 +73,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other) {
+        var obj = other.gameObject;
+        print("Touchdown!");
+        
+        if (obj.CompareTag("Asteroid")) {
+            Die("Asteroid");
+        }
+
+        if (obj.CompareTag("Pickup")) {
+            obj.GetComponent<ObstacleMovement>().Disable();
+            ability.ChangeCountBy(1);
+        }
+    }
+
     public void FlipGravity(InputAction.CallbackContext context) { if (context.performed && !frozen) gravity *= -1; }
-    public void ActivateAbility(InputAction.CallbackContext context) { if (context.performed && !ab.ability && !frozen) ab.ability = true; }
+    public void ActivateAbility(InputAction.CallbackContext context) { if (context.performed && !ability.activated && !frozen) ability.activated = true; }
 }

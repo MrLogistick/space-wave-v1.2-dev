@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Hermes
   m_EditorClassIdentifier: Assembly-CSharp::ShipData
   moveSpeed: 0.4
-  turnSpeed: 900
+  turnSpeed: 700
   acceleration: 1.6
   ship: {fileID: 4959970065505324431, guid: 1351935b4d9d9f74eaa72396f303cad6, type: 3}

@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -325324466057986798, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
+  m_Sprite: {fileID: 1840820989, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
   m_Color: {r: 1, g: 0.27450982, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +122,7 @@ EdgeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -152,9 +152,5 @@ MonoBehaviour:
   initialSpeed: 7
   scaleMultiplier: 1.003
   stages:
-  - {fileID: 6553544311669025859, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
-  - {fileID: -3684992673652908049, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
-  - {fileID: 2124971384046444356, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
-  - {fileID: -325324466057986798, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
   - {fileID: 1840820989, guid: 268f5df22c3f28140a4e49eb874eee3e, type: 3}
   lifetime: 2.4
