@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Mathf.Abs(transform.position.y) >= borderPosition && !frozen) { Die("Gravity"); }
+        if (Mathf.Abs(transform.position.y) >= borderPosition && !frozen) { Die("Gravity", false); }
 
         if (frozen) {
             coll.enabled = false;
@@ -46,6 +46,13 @@ public class PlayerController : MonoBehaviour
                 var emission = trail.emission;
                 emission.enabled = false;
             }
+        }
+
+        if (!GameManager.instance) return;
+
+        foreach (var trail in trails) {
+            var speed = trail.velocityOverLifetime;
+            speed.x = new ParticleSystem.MinMaxCurve(-GameManager.instance.gameSpeed);
         }
     }
 
@@ -66,26 +73,47 @@ public class PlayerController : MonoBehaviour
         ship.rotation = Quaternion.Euler(0f, 0f, currentRot);
     }
 
-    void Die(string deathBy) {
+    void Die(string deathBy, bool explode) {
         frozen = true;
         GameManager.instance.TriggerPostGame(deathBy);
 
-        if (deathBy.Contains("roid")) {
+        if (explode) {
             ship.gameObject.SetActive(false);
             ability.gameObject.SetActive(false);
         }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        var obj = other.gameObject;
+        if (!other.GetComponent<ObstacleMovement>()) return;
+        var obj = other.GetComponent<ObstacleMovement>();
         
-        if (obj.CompareTag("Asteroid")) {
-            Die("Asteroid");
-        }
-
-        if (obj.CompareTag("Pickup")) {
-            obj.GetComponent<ObstacleMovement>().Disable();
-            ability.ChangeCountBy(1);
+        switch (obj.roidType) {
+            case ObstacleMovement.RoidType.Asteroid:
+                obj.Disable(true);
+                Die("Asteroid", true);
+                break;
+            case ObstacleMovement.RoidType.Shiproid:
+                obj.Disable(true);
+                Die("Shipwreck", true);
+                break;
+            case ObstacleMovement.RoidType.Bombroid:
+                obj.Disable(true);
+                Die("Bombroid", true);
+                break;
+            case ObstacleMovement.RoidType.Asbroid:
+                obj.Disable(true);
+                Die("ASBroid", true);
+                break;
+            case ObstacleMovement.RoidType.Megaroid:
+                Die("Megaroid", true);
+                break;
+            case ObstacleMovement.RoidType.Tunnelroid:
+                Die("Tunnelroid", true);
+                break;
+            case ObstacleMovement.RoidType.Pickup:
+                obj.Disable(false);
+                ability.ChangeCountBy(1);
+                break;
         }
     }
 

@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     [SerializeField] float initialGameSpeed;
-    float gameSpeed;
+    public float endMultiplier;
+    public float gameSpeed { private set; get; }
 
     float gameTime;
+    public bool postGame { private set; get; }
 
     public static GameManager instance {private set; get;}
 
@@ -14,10 +16,18 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         gameSpeed = initialGameSpeed;
+
+        endMultiplier = 0.99f;
+        postGame = false;
     }
 
     void Update() {
-        gameTime += Time.deltaTime;
+        if (postGame) {
+            gameSpeed *= endMultiplier;
+        }
+        else {
+            gameTime += Time.deltaTime;
+        }
     }
 
     public void AlterGameSpeedBy(float value) {
@@ -25,6 +35,6 @@ public class GameManager : MonoBehaviour {
     }
 
     public void TriggerPostGame(string deathBy) {
-        
+        postGame = true;
     }
 }

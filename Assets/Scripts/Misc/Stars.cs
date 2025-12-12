@@ -29,14 +29,14 @@ public class Stars : MonoBehaviour
         var curve = trails.widthOverTrail.curve;
         var key = curve.keys[0];
 
-        var change = (ps.main.simulationSpeed - threshold) / 100f;
+        var change = (ps.main.simulationSpeed - threshold) / 10f;
         
         trails.ratio = change;
         key.value = change;
         curve.MoveKey(0, key);
 
         // Speed
-        // var main = ps.main;
-        // main.simulationSpeed += Time.deltaTime * 0.1f;
+        var main = ps.main;
+        main.simulationSpeed = GameManager.instance.gameSpeed / 10f;
     }
 }

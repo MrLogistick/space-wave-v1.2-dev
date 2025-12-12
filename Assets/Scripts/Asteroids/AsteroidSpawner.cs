@@ -5,65 +5,163 @@ public class AsteroidSpawner : MonoBehaviour {
     // asteroid spawner, field spawner and pickup spawner
 
     // x=asteroids, y=fields
+    [Header("Asteroids, Fields")]
     [SerializeField] Vector2 initialRate;
     [SerializeField] Vector2 maxRate;
     [SerializeField] Vector2 rateError;
     [SerializeField] Vector2 rateJump;
     [SerializeField] Vector2 density;
+
     float currentRoidRate = 0f;
     float currentFieldRate = 0f;
     float currentDensity = 0;
 
-    [SerializeField] Animator fieldWarningVisual;
-    [SerializeField] float fieldWarningTime;
-
-    [SerializeField] Vector2 fieldLife;
-    bool fieldActive = false;
-
-    [SerializeField] GameObject[] targetObject;
-
+    [Header("Asteroids Extended")]
+    [SerializeField] GameObject[] generalRoids;
+    [SerializeField] GameObject[] specialRoids;
+    [SerializeField] GameObject[] megaRoids;
+    [SerializeField] GameObject[] pickup;
+    [SerializeField] float generalWeight;
+    [SerializeField] float specialWeight;
+    [SerializeField] float megaWeight;
+    [SerializeField] float pickupWeight;
+    [Space]
+    [SerializeField] float spawnError;
+    [SerializeField] float initialDensity;
+    [Space]
     [SerializeField] float specialRoidDelay;
     bool specialRoidsActive = false;
+    [HideInInspector] public bool megaroidActive;
+
+    [Header("Fields Extended")]
+    [SerializeField] Animator fieldWarningVisual;
+    [SerializeField] float fieldWarningTime;
+    [Space]
+    [SerializeField] Vector2 fieldLife;
+    int fieldsEndured;
+    [Space]
+    [SerializeField] float speedJump;
+
+    [Header("Borders")]
+    [SerializeField] float generalBorder;
+    [SerializeField] float megaroidBorder;
+    [SerializeField] float posOffset;
 
     GameManager manager;
+    [SerializeField] Camera cam;
 
     IEnumerator Start() {
+        var x = cam.transform.position.x + posOffset + cam.orthographicSize * cam.aspect;
+        transform.position = new Vector2(x, 0f);
+
         currentRoidRate = initialRate.x;
         currentFieldRate = initialRate.y;
-        currentDensity = density.x;
+        currentDensity = initialDensity;
 
         manager = GameManager.instance;
 
-        FieldSpawn();
+        StartCoroutine(AsteroidSpawn());
+        StartCoroutine(FieldSpawn());
 
         yield return new WaitForSeconds(specialRoidDelay);
         specialRoidsActive = true;
     }
 
     void Update() {
-        if (fieldActive) {
-            currentDensity = density.y;
-        } else {
-            currentDensity = density.x;
+        if (!manager.postGame) return;
+        fieldWarningVisual.speed *= manager.endMultiplier;
+    }
+
+    IEnumerator AsteroidSpawn() {
+        while (manager.gameSpeed > 0.5f) {
+            var rate = currentRoidRate + Random.Range(-rateError.x, rateError.y);
+            yield return new WaitForSeconds(rate);
+
+            for (int i = 0; i < currentDensity; i++) {
+                float total = generalWeight + specialWeight + megaWeight + pickupWeight;
+                float roll;
+
+                if (!specialRoidsActive) {
+                    roll = 0f;
+                } else {
+                    
+                    roll = Random.value * total;
+                }
+
+                if (roll < generalWeight) {
+                    // General Asteroids
+                    InstantiateAsteroid(generalRoids);
+                }
+                else if (roll < generalWeight + specialWeight) {
+                    // Special Asteroids (ASB, Bomb, Shipwreck)
+                    InstantiateAsteroid(specialRoids);
+                }
+                else if (roll < generalWeight + specialWeight + megaWeight) {
+                    // Megaroids (Megaroid, Tunnelroid)
+                    if (megaroidActive) {
+                        InstantiateAsteroid(generalRoids);
+                    }
+                    else {
+                        megaroidActive = true;
+                        InstantiateAsteroid(megaRoids);                        
+                    }
+
+                }
+                else {
+                    // Pickup
+                    InstantiateAsteroid(pickup);
+                }
+
+                var error = Random.value * spawnError;
+                yield return new WaitForSeconds(error);
+            }
         }
     }
 
+    void InstantiateAsteroid(GameObject[] list) {
+        if (list.Length < 1) return;
+        var i = Random.Range(0, list.Length);
+        var roid = Instantiate(list[i], transform);
+        var roidScript = roid.GetComponent<ObstacleMovement>();
+
+        roidScript.camLeft = cam.transform.position.x - cam.orthographicSize * cam.aspect;
+
+        float roidPos;
+        switch (roidScript.roidType) {
+            default:
+                roidPos = Random.Range(-generalBorder, generalBorder);
+                break;
+            case ObstacleMovement.RoidType.Megaroid:
+                roidPos = megaroidBorder * (Random.value < 0.5f ? -1 : 1);
+                break;
+            case ObstacleMovement.RoidType.Tunnelroid:
+                roidPos = 0f;
+                break;
+        }
+
+        roid.transform.position = new Vector2(transform.position.x, roidPos);
+    }
+
     IEnumerator FieldSpawn() {
-        var rate = currentFieldRate + Random.Range(-rateError.y, rateError.y);
-        yield return new WaitForSeconds(rate - fieldWarningTime);
+        while (!manager.postGame) {
+            var rate = currentFieldRate + Random.Range(-rateError.y, rateError.y);
+            yield return new WaitForSeconds(rate - fieldWarningTime);
+            if (manager.postGame) yield break;
 
-        fieldWarningVisual.SetTrigger("Switch");
-        yield return new WaitForSeconds(fieldWarningTime);
+            fieldWarningVisual.SetTrigger("Switch");
+            yield return new WaitForSeconds(fieldWarningTime);
+            if (manager.postGame) yield break;
 
-        fieldWarningVisual.SetTrigger("Switch");
-        fieldActive = true;
+            currentDensity = density.y;
+            manager.AlterGameSpeedBy(speedJump);
+            currentFieldRate = Mathf.Min(currentFieldRate - rateJump.y, maxRate.y);
 
-        currentFieldRate = Mathf.Min(currentFieldRate - rateJump.y, maxRate.y);
+            yield return new WaitForSeconds(Random.Range(fieldLife.x, fieldLife.y));
+            if (manager.postGame) yield break;
 
-        yield return new WaitForSeconds(Random.Range(fieldLife.x, fieldLife.y));
-
-        fieldActive = false;
-
-        FieldSpawn();
+            fieldsEndured++;
+            currentDensity = density.x;
+            fieldWarningVisual.SetTrigger("Switch");
+        }
     }
 }
