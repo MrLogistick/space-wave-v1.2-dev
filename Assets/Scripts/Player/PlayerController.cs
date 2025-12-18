@@ -18,7 +18,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] ShipData data;
 
+    GameManager manager;
+
     void Start() {
+        manager = GameManager.instance;
+
         if (!data) { 
             Debug.LogError("ShipData Not Found"); 
             enabled = false;
@@ -48,11 +52,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (!GameManager.instance) return;
+        if (!manager) return;
 
         foreach (var trail in trails) {
             var speed = trail.velocityOverLifetime;
-            speed.x = new ParticleSystem.MinMaxCurve(-GameManager.instance.gameSpeed);
+            speed.x = new ParticleSystem.MinMaxCurve(-manager.gameSpeed);
         }
     }
 
@@ -75,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
     void Die(string deathBy, bool explode) {
         frozen = true;
-        GameManager.instance.TriggerPostGame(deathBy);
+        manager.TriggerPostGame(deathBy);
 
         if (explode) {
             ship.gameObject.SetActive(false);
@@ -111,8 +115,12 @@ public class PlayerController : MonoBehaviour
                 Die("Tunnelroid", true);
                 break;
             case ObstacleMovement.RoidType.Pickup:
-                obj.Disable(false);
+                obj.Disable(true);
                 ability.ChangeCountBy(1);
+                break;
+            case ObstacleMovement.RoidType.Speedring:
+                manager.AlterGameSpeedBy(obj.gameSpeedJump);
+                obj.PlaySecondaryEffect();
                 break;
         }
     }

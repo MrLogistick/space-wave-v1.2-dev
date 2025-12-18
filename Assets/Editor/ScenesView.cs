@@ -57,7 +57,7 @@ public class ScenesView : EditorWindow
                     {
                         EditorSceneManager.OpenScene(path);
                     }
-                }                 
+                }
             }
             else
             {

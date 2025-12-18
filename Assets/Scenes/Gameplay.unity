@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   initialGameSpeed: 15
-  endMultiplier: 0
+  endMultiplier: 0.99
 --- !u!4 &558519044
 Transform:
   m_ObjectHideFlags: 0
@@ -591,10 +591,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13db307f409a6cd4b939badeeecc1374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AsteroidSpawner
-  initialRate: {x: 1.2, y: 30}
-  maxRate: {x: 0.6, y: 15}
-  rateError: {x: 0.1, y: 0.5}
-  rateJump: {x: 0.05, y: 2.5}
+  rateGap: {x: 18, y: 600}
+  initialGapProgress: {x: 0, y: 450}
+  rateError: {x: 0.1, y: 5}
   density: {x: 2, y: 3}
   generalRoids:
   - {fileID: 5954303710576478060, guid: e32c12f1127c64c4dbb535922f0015d9, type: 3}
@@ -611,10 +610,13 @@ MonoBehaviour:
   - {fileID: 5954303710576478060, guid: 5c5df818ac00ce14ead5293abaada0e1, type: 3}
   pickup:
   - {fileID: 5954303710576478060, guid: 02c728775d8d24c43a5a05a20aa60351, type: 3}
-  generalWeight: 10
-  specialWeight: 4
-  megaWeight: 2
-  pickupWeight: 2
+  speedrings:
+  - {fileID: 5954303710576478060, guid: f9f5e3074f5d5d94eb7022ca7accf85d, type: 3}
+  generalWeight: 140
+  specialWeight: 60
+  megaWeight: 48
+  pickupWeight: 12
+  speedringWeight: 4
   spawnError: 0.15
   initialDensity: 1
   specialRoidDelay: 3
@@ -622,7 +624,7 @@ MonoBehaviour:
   fieldWarningVisual: {fileID: 1145882480}
   fieldWarningTime: 3.12
   fieldLife: {x: 8, y: 16}
-  speedJump: 1.5
+  gameSpeedJump: 0.4
   generalBorder: 11
   megaroidBorder: 10
   posOffset: 10
@@ -919,6 +921,14 @@ PrefabInstance:
     - target: {fileID: 7279672046704794285, guid: 8e535cdce489d784eb171ec804fe27be, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279672046704794285, guid: 8e535cdce489d784eb171ec804fe27be, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279672046704794285, guid: 8e535cdce489d784eb171ec804fe27be, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7279672046704794285, guid: 8e535cdce489d784eb171ec804fe27be, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key3.a

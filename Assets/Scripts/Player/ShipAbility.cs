@@ -59,6 +59,7 @@ public class ShipAbility : MonoBehaviour
     }
 
     public void ChangeCountBy(int value) {
+        if (bulletCount == maxBullets) return;
         bulletCount += value;
     }
 }

@@ -6,14 +6,10 @@ public class AsteroidSpawner : MonoBehaviour {
 
     // x=asteroids, y=fields
     [Header("Asteroids, Fields")]
-    [SerializeField] Vector2 initialRate;
-    [SerializeField] Vector2 maxRate;
+    [SerializeField] Vector2 rateGap;
+    [SerializeField] Vector2 initialGapProgress;
     [SerializeField] Vector2 rateError;
-    [SerializeField] Vector2 rateJump;
     [SerializeField] Vector2 density;
-
-    float currentRoidRate = 0f;
-    float currentFieldRate = 0f;
     float currentDensity = 0;
 
     [Header("Asteroids Extended")]
@@ -21,10 +17,12 @@ public class AsteroidSpawner : MonoBehaviour {
     [SerializeField] GameObject[] specialRoids;
     [SerializeField] GameObject[] megaRoids;
     [SerializeField] GameObject[] pickup;
+    [SerializeField] GameObject[] speedrings;
     [SerializeField] float generalWeight;
     [SerializeField] float specialWeight;
     [SerializeField] float megaWeight;
     [SerializeField] float pickupWeight;
+    [SerializeField] float speedringWeight;
     [Space]
     [SerializeField] float spawnError;
     [SerializeField] float initialDensity;
@@ -40,7 +38,7 @@ public class AsteroidSpawner : MonoBehaviour {
     [SerializeField] Vector2 fieldLife;
     int fieldsEndured;
     [Space]
-    [SerializeField] float speedJump;
+    [SerializeField] float gameSpeedJump;
 
     [Header("Borders")]
     [SerializeField] float generalBorder;
@@ -54,14 +52,12 @@ public class AsteroidSpawner : MonoBehaviour {
         var x = cam.transform.position.x + posOffset + cam.orthographicSize * cam.aspect;
         transform.position = new Vector2(x, 0f);
 
-        currentRoidRate = initialRate.x;
-        currentFieldRate = initialRate.y;
         currentDensity = initialDensity;
 
         manager = GameManager.instance;
 
-        StartCoroutine(AsteroidSpawn());
-        StartCoroutine(FieldSpawn());
+        StartCoroutine(AsteroidSpawn(true));
+        StartCoroutine(FieldSpawn(true));
 
         yield return new WaitForSeconds(specialRoidDelay);
         specialRoidsActive = true;
@@ -72,13 +68,23 @@ public class AsteroidSpawner : MonoBehaviour {
         fieldWarningVisual.speed *= manager.endMultiplier;
     }
 
-    IEnumerator AsteroidSpawn() {
+    IEnumerator AsteroidSpawn(bool initial) {
         while (manager.gameSpeed > 0.5f) {
-            var rate = currentRoidRate + Random.Range(-rateError.x, rateError.y);
+            float rate;
+
+            if (initial) {
+                initial = false;
+                rate = initialGapProgress.x / manager.gameSpeed;
+            }
+            else {
+                rate = rateGap.x / manager.gameSpeed;
+            }
+            
+            rate += Random.Range(-rateError.x, rateError.x);
             yield return new WaitForSeconds(rate);
 
             for (int i = 0; i < currentDensity; i++) {
-                float total = generalWeight + specialWeight + megaWeight + pickupWeight;
+                float total = generalWeight + specialWeight + megaWeight + pickupWeight + speedringWeight;
                 float roll;
 
                 if (!specialRoidsActive) {
@@ -107,9 +113,13 @@ public class AsteroidSpawner : MonoBehaviour {
                     }
 
                 }
-                else {
+                else if (roll < generalWeight + specialWeight + megaWeight + pickupWeight) {
                     // Pickup
                     InstantiateAsteroid(pickup);
+                }
+                else {
+                    // Speedrings
+                    InstantiateAsteroid(speedrings);
                 }
 
                 var error = Random.value * spawnError;
@@ -142,9 +152,19 @@ public class AsteroidSpawner : MonoBehaviour {
         roid.transform.position = new Vector2(transform.position.x, roidPos);
     }
 
-    IEnumerator FieldSpawn() {
+    IEnumerator FieldSpawn(bool initial) {
         while (!manager.postGame) {
-            var rate = currentFieldRate + Random.Range(-rateError.y, rateError.y);
+            float rate;
+
+            if (initial) {
+                initial = false;
+                rate = initialGapProgress.y / manager.gameSpeed;
+            }
+            else {
+                rate = rateGap.y / manager.gameSpeed;
+            }
+
+            rate += Random.Range(-rateError.y, rateError.y);
             yield return new WaitForSeconds(rate - fieldWarningTime);
             if (manager.postGame) yield break;
 
@@ -153,14 +173,15 @@ public class AsteroidSpawner : MonoBehaviour {
             if (manager.postGame) yield break;
 
             currentDensity = density.y;
-            manager.AlterGameSpeedBy(speedJump);
-            currentFieldRate = Mathf.Min(currentFieldRate - rateJump.y, maxRate.y);
 
             yield return new WaitForSeconds(Random.Range(fieldLife.x, fieldLife.y));
             if (manager.postGame) yield break;
 
             fieldsEndured++;
             currentDensity = density.x;
+            manager.AlterGameSpeedBy(gameSpeedJump);
+
+            InstantiateAsteroid(speedrings);
             fieldWarningVisual.SetTrigger("Switch");
         }
     }

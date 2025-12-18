@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         gameSpeed = initialGameSpeed;
-
-        endMultiplier = 0.99f;
         postGame = false;
     }
 
