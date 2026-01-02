@@ -5,12 +5,13 @@ public class Stars : MonoBehaviour
     [SerializeField] float offset;
     [SerializeField] float threshold;
 
-    [SerializeField] Camera cam;
+    Camera cam;
     ParticleSystem ps;
 
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
+        cam = Camera.main;
     }
 
     void Update()

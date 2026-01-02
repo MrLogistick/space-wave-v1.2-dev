@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         ship.rotation = Quaternion.Euler(0f, 0f, currentRot);
     }
 
-    void Die(string deathBy, bool explode) {
+    public void Die(string deathBy, bool explode) {
         frozen = true;
         manager.TriggerPostGame(deathBy);
 
@@ -92,33 +92,12 @@ public class PlayerController : MonoBehaviour
         var obj = other.GetComponent<ObstacleMovement>();
         
         switch (obj.roidType) {
-            case ObstacleMovement.RoidType.Asteroid:
-                obj.Disable(true);
-                Die("Asteroid", true);
-                break;
-            case ObstacleMovement.RoidType.Shiproid:
-                obj.Disable(true);
-                Die("Shipwreck", true);
-                break;
-            case ObstacleMovement.RoidType.Bombroid:
-                obj.Disable(true);
-                Die("Bombroid", true);
-                break;
-            case ObstacleMovement.RoidType.Asbroid:
-                obj.Disable(true);
-                Die("ASBroid", true);
-                break;
-            case ObstacleMovement.RoidType.Megaroid:
-                Die("Megaroid", true);
-                break;
-            case ObstacleMovement.RoidType.Tunnelroid:
-                Die("Tunnelroid", true);
-                break;
             case ObstacleMovement.RoidType.Pickup:
                 obj.Disable(true);
                 ability.ChangeCountBy(1);
                 break;
             case ObstacleMovement.RoidType.Speedring:
+                print("speeed");
                 manager.AlterGameSpeedBy(obj.gameSpeedJump);
                 obj.PlaySecondaryEffect();
                 break;

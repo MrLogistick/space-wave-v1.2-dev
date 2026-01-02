@@ -65,7 +65,7 @@ public class ObstacleMovement : MonoBehaviour {
             GetComponentInParent<AsteroidSpawner>().megaroidActive = false;
         }
 
-        if (explode) {
+        if (explode && explosion) {
             GetComponent<SpriteRenderer>().enabled = false;
 
             if (GetComponent<CircleCollider2D>()) {
@@ -99,7 +99,6 @@ public class ObstacleMovement : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-
         if (!other.gameObject.GetComponent<ObstacleMovement>()) return;
         var obj = other.gameObject.GetComponent<ObstacleMovement>();
 
@@ -109,6 +108,18 @@ public class ObstacleMovement : MonoBehaviour {
                     Disable(true);
                 }
                 break;
+            case RoidType.Megaroid:
+                break;
+            case RoidType.Tunnelroid:
+                break;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (!other.GetComponent<ObstacleMovement>()) return;
+        var obj = other.GetComponent<ObstacleMovement>();
+
+        switch (roidType) {
             case RoidType.Speedring:
                 if (obj.roidType == RoidType.Megaroid) {
                     Disable(true);
@@ -118,10 +129,6 @@ public class ObstacleMovement : MonoBehaviour {
                 if (obj.roidType == RoidType.Megaroid) {
                     Disable(false);
                 }
-                break;
-            case RoidType.Megaroid:
-                break;
-            case RoidType.Tunnelroid:
                 break;
         }
     }
