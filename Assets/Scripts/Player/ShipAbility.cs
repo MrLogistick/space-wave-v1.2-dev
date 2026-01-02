@@ -30,7 +30,7 @@ public class ShipAbility : MonoBehaviour
         bulletCount = initialBullets;
 
         if (visual) {
-            Transform liveVisual = Instantiate(visual, GameObject.Find("MainCanvas").transform).transform;
+            Transform liveVisual = Instantiate(visual, GameObject.FindGameObjectWithTag("MainCanvas").transform).transform;
             fill = liveVisual.GetChild(0).GetComponent<Image>();
         }
     }

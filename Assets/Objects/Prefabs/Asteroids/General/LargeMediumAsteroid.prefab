@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4522909805550088927}
   m_Layer: 0
   m_Name: LargeMediumAsteroid
-  m_TagString: Pickup
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

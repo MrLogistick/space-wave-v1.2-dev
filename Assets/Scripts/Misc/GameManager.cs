@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour {
     public float gameSpeed { private set; get; }
 
     public float gameTime;
+    public float highscore;
+    public int attempts;
+
     public string deathBy;
     public bool postGame { private set; get; }
 
@@ -20,6 +23,9 @@ public class GameManager : MonoBehaviour {
     void Start() {
         gameSpeed = initialGameSpeed;
         postGame = false;
+
+        attempts = PlayerPrefs.GetInt("Attempts", 0) + 1;
+        PlayerPrefs.SetInt("Attempts", attempts);
     }
 
     void Update() {
@@ -38,6 +44,7 @@ public class GameManager : MonoBehaviour {
     public void TriggerPostGame(string value) {
         postGame = true;
         deathBy = value;
-        Instantiate(postGameMenu);
+
+        Instantiate(postGameMenu, GameObject.FindGameObjectWithTag("MainCanvas").transform);
     }
 }

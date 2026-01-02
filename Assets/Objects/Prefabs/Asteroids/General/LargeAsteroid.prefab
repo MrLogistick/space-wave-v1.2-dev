@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -732913829813544485}
   m_Layer: 0
   m_Name: LargeAsteroid
-  m_TagString: Pickup
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,14 +260,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145942750958550131, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 720562783111588717, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 720562783111588717, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}
-      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7321719914303737434, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}

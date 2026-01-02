@@ -4,8 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Pickup
-  - Asteroid
+  - MainCanvas
   layers:
   - Default
   - TransparentFX
