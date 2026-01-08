@@ -25,8 +25,11 @@ public class ObstacleMovement : MonoBehaviour {
         Speedring
     }
 
-    public float gameSpeedJump;
+    [SerializeField] float gameSpeedJump;
     GameManager manager;
+
+    [SerializeField] int maxHits;
+    int hits = 0;
 
     void Start() {
         manager = GameManager.instance;
@@ -57,6 +60,16 @@ public class ObstacleMovement : MonoBehaviour {
         if (manager.postGame) {
             rotSpeed *= manager.endMultiplier;
             currentSpeedError *= manager.endMultiplier;
+
+            if (explosion) {
+                var main = explosion.main;
+                main.simulationSpeed *= manager.endMultiplier;
+            }
+
+            if (secondaryEffect) {
+                var main = secondaryEffect.main;
+                main.simulationSpeed *= manager.endMultiplier;
+            }
         }
     }
 
@@ -66,8 +79,6 @@ public class ObstacleMovement : MonoBehaviour {
         }
 
         if (explode && explosion) {
-            GetComponent<SpriteRenderer>().enabled = false;
-
             if (GetComponent<CircleCollider2D>()) {
                 GetComponent<CircleCollider2D>().enabled = false;
             }
@@ -76,11 +87,19 @@ public class ObstacleMovement : MonoBehaviour {
             }
 
             if (roidType == RoidType.Speedring) {
+                transform.GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(1).gameObject.SetActive(false);
+
                 for (var i = 0; i < explosion.transform.childCount; i++) {
                     explosion.transform.GetChild(i).GetComponent<ParticleSystem>().Play();
                 }
             }
             else {
+                GetComponent<SpriteRenderer>().enabled = false;
+
+                var vol = explosion.velocityOverLifetime;
+                vol.x = -1f * (manager.gameSpeed + currentSpeedError);
+
                 explosion.Play();
             }
         }
@@ -89,22 +108,35 @@ public class ObstacleMovement : MonoBehaviour {
         }
     }
 
-    public void PlaySecondaryEffect() {
+    public void SpeedRingEffect() {
         if (!secondaryEffect) return;
         secondaryEffect.Play();
+        manager.AlterGameSpeedBy(gameSpeedJump);
     }
 
     void OnParticleSystemStopped() {
         Destroy(gameObject);
     }
 
-    void OnCollisionEnter2D(Collision2D other) {
-        if (!other.gameObject.GetComponent<ObstacleMovement>()) return;
-        var obj = other.gameObject.GetComponent<ObstacleMovement>();
+    void HandleCollision(Transform other) {
+        if (other.CompareTag("Weapon")) {
+            hits++;
 
-        switch (roidType) {
-            default:
-                if (obj.roidType != RoidType.Speedring && obj.roidType != RoidType.Pickup) {
+            if (hits >= maxHits) {
+                Disable(true);
+            } else {
+                secondaryEffect.Play();
+            }
+
+            return;
+        }
+
+        if (!other.GetComponent<ObstacleMovement>()) return;
+        var obj = other.GetComponent<ObstacleMovement>();
+
+        switch(roidType) {
+            case RoidType.Speedring:
+                if (obj.roidType == RoidType.Megaroid) {
                     Disable(true);
                 }
                 break;
@@ -112,24 +144,19 @@ public class ObstacleMovement : MonoBehaviour {
                 break;
             case RoidType.Tunnelroid:
                 break;
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
-        if (!other.GetComponent<ObstacleMovement>()) return;
-        var obj = other.GetComponent<ObstacleMovement>();
-
-        switch (roidType) {
-            case RoidType.Speedring:
-                if (obj.roidType == RoidType.Megaroid) {
+            default:
+                if (obj.roidType != RoidType.Speedring && obj.roidType != RoidType.Pickup) {
                     Disable(true);
                 }
                 break;
-            case RoidType.Pickup:
-                if (obj.roidType == RoidType.Megaroid) {
-                    Disable(false);
-                }
-                break;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        HandleCollision(other.transform);
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        HandleCollision(other.transform);
     }
 }

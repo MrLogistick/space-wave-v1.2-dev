@@ -36,4 +36,19 @@ public class PlayerCollisions : MonoBehaviour {
                 break;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (!other.gameObject.GetComponent<ObstacleMovement>()) return;
+        var obj = other.gameObject.GetComponent<ObstacleMovement>();
+
+        switch (obj.roidType) {
+            case ObstacleMovement.RoidType.Pickup:
+                obj.Disable(true);
+                controller.AlterAbility();
+                break;
+            case ObstacleMovement.RoidType.Speedring:
+                obj.SpeedRingEffect();
+                break;
+        }
+    }
 }

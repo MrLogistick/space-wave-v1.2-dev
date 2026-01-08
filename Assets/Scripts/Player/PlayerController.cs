@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     PolygonCollider2D coll;
 
     [SerializeField] ShipData data;
+    [SerializeField] bool collisionsEnabled;
+
+    [SerializeField] ParticleSystem explosion;
 
     GameManager manager;
 
@@ -36,6 +39,8 @@ public class PlayerController : MonoBehaviour
             coll = prefab.coll;
 
             currentRot = ship.rotation.z;
+
+            coll.enabled = collisionsEnabled ? true : false;
         }
     }
 
@@ -58,6 +63,10 @@ public class PlayerController : MonoBehaviour
             var speed = trail.velocityOverLifetime;
             speed.x = new ParticleSystem.MinMaxCurve(-manager.gameSpeed);
         }
+
+        if (!manager.postGame) return;
+        var main = explosion.main;
+        main.simulationSpeed *= manager.endMultiplier;
     }
 
     void FixedUpdate()
@@ -77,30 +86,20 @@ public class PlayerController : MonoBehaviour
         ship.rotation = Quaternion.Euler(0f, 0f, currentRot);
     }
 
+    public void AlterAbility() {
+        ability.ChangeCountBy(1);
+    }
+
     public void Die(string deathBy, bool explode) {
         frozen = true;
         manager.TriggerPostGame(deathBy);
 
         if (explode) {
-            ship.gameObject.SetActive(false);
+            ship.GetComponent<SpriteRenderer>().enabled = false;
+            coll.enabled = false;
             ability.gameObject.SetActive(false);
-        }
-    }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (!other.GetComponent<ObstacleMovement>()) return;
-        var obj = other.GetComponent<ObstacleMovement>();
-        
-        switch (obj.roidType) {
-            case ObstacleMovement.RoidType.Pickup:
-                obj.Disable(true);
-                ability.ChangeCountBy(1);
-                break;
-            case ObstacleMovement.RoidType.Speedring:
-                print("speeed");
-                manager.AlterGameSpeedBy(obj.gameSpeedJump);
-                obj.PlaySecondaryEffect();
-                break;
+            explosion.Play();
         }
     }
 

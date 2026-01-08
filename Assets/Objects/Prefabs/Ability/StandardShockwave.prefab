@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1313619999060098166}
   m_Layer: 0
   m_Name: StandardShockwave
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,8 +129,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.5, y: 0}
-  - {x: 0.5, y: 0}
+  - {x: -0.20440078, y: 0.46877858}
+  - {x: 0.06864977, y: 0.41840452}
+  - {x: 0.2897054, y: 0.29824772}
+  - {x: 0.43741304, y: 0.057145353}
+  - {x: 0.46416977, y: -0.21498193}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

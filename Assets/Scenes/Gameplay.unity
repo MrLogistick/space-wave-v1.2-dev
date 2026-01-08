@@ -439,7 +439,7 @@ MonoBehaviour:
   specialWeight: 60
   megaWeight: 48
   pickupWeight: 12
-  speedringWeight: 4
+  speedringWeight: 4000
   spawnError: 0.15
   initialDensity: 1
   specialRoidDelay: 3
@@ -449,7 +449,7 @@ MonoBehaviour:
   fieldLife: {x: 8, y: 16}
   gameSpeedJump: 0.4
   generalBorder: 11
-  megaroidBorder: 10
+  megaroidBorder: 9
   posOffset: 10
   cam: {fileID: 1856225067}
 --- !u!1 &1329195832
@@ -801,6 +801,14 @@ PrefabInstance:
     - target: {fileID: 2261150540541222356, guid: eddae528ee8a3704488ab79f8003efd6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789547011765966693, guid: eddae528ee8a3704488ab79f8003efd6, type: 3}
+      propertyPath: SizeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789547011765966693, guid: eddae528ee8a3704488ab79f8003efd6, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

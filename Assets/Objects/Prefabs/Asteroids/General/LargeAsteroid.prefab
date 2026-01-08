@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbb1a5b84d94e94f95b518a598f9f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
-  speedError: 5
+  speedError: 2
   maxSpeed: 100
   maxRotSpeed: 60
   camOffset: 5
@@ -187,6 +187,7 @@ MonoBehaviour:
   secondaryEffect: {fileID: 0}
   roidType: 0
   gameSpeedJump: 0
+  maxHits: 1
 --- !u!50 &-732913829813544485
 Rigidbody2D:
   serializedVersion: 5
@@ -261,6 +262,18 @@ PrefabInstance:
     - target: {fileID: 145942750958550131, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 720562783111588717, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 720562783111588717, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 720562783111588717, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 7321719914303737434, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}
       propertyPath: m_Name

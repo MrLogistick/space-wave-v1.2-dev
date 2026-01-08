@@ -19,24 +19,21 @@ public class StandardShockwave : MonoBehaviour
 
     SpriteRenderer sr;
 
-    void Start()
-    {
+    void Start() {
         sr = GetComponent<SpriteRenderer>();
 
         currentSpeed = initialSpeed;
         transform.localScale = Vector3.one * initialSize;
     }
 
-    void Update()
-    {
-        if (lifetimeElapsed >= lifetime)
-        {
+    void Update() {
+        if (lifetimeElapsed >= lifetime) {
             Destroy(gameObject);
-        } else
-        {
+        }
+        else {
             lifetimeElapsed += Time.deltaTime;
             float currentStage = Mathf.Clamp(lifetimeElapsed / (lifetime / stages.Length), 0, stages.Length - 1);
-            sr.sprite = stages[Mathf.FloorToInt(currentStage)];
+            // sr.sprite = stages[Mathf.FloorToInt(currentStage)];
 
             currentSpeed += acceleration * Time.deltaTime;
             currentSpeed = Mathf.Clamp(currentSpeed, 0f, topSpeed);
