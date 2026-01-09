@@ -32,7 +32,7 @@ public class StandardShockwave : MonoBehaviour
         }
         else {
             lifetimeElapsed += Time.deltaTime;
-            float currentStage = Mathf.Clamp(lifetimeElapsed / (lifetime / stages.Length), 0, stages.Length - 1);
+            // float currentStage = Mathf.Clamp(lifetimeElapsed / (lifetime / stages.Length), 0, stages.Length - 1);
             // sr.sprite = stages[Mathf.FloorToInt(currentStage)];
 
             currentSpeed += acceleration * Time.deltaTime;

@@ -1,11 +1,10 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PostgameMenu : MonoBehaviour {
-    [SerializeField] TextMeshProUGUI deathMsg;
-    [SerializeField] TextMeshProUGUI highscoreText;
+    [SerializeField] BitmapText deathMsg;
+    [SerializeField] BitmapText highscoreText;
     [SerializeField] Animator highscore;
 
     GameManager manager;
@@ -13,13 +12,13 @@ public class PostgameMenu : MonoBehaviour {
     void Start() {
         manager = GameManager.instance;
 
-        if (manager.highscore > manager.gameTime) {
+        if (manager.score > manager.highscore) {
             highscore.SetTrigger("Play");
+            manager.highscore = manager.score;
+            PlayerPrefs.SetInt("Highscore", manager.highscore);
         }
 
-        float minutes = manager.highscore / 60;
-        float seconds = manager.highscore % 60;
-        highscoreText.text = $"{minutes:00}:{seconds:00}";
+        highscoreText.text = $"{manager.highscore:0000000000}";
 
         switch (manager.attempts) {
             default:
@@ -56,7 +55,7 @@ public class PostgameMenu : MonoBehaviour {
         }
 
         if (Keyboard.current.backspaceKey.wasPressedThisFrame || Keyboard.current.mKey.wasPressedThisFrame) {
-            // Menu();
+            Menu();
         }
     }
 

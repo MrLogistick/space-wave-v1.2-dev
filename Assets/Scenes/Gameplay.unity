@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 16
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 640, y: 360}
   m_ScreenMatchMode: 0
@@ -252,10 +252,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   initialGameSpeed: 15
   endMultiplier: 0.99
-  gameTime: 0
+  score: 0
   highscore: 0
   attempts: 0
   deathBy: 
+  scoreTextPrefab: {fileID: 8984185340735397383, guid: b0c3506cd4b3c4c478d2a2e2266b1e08, type: 3}
   postGameMenu: {fileID: 1884117165205933692, guid: d045674474eebc34496a1ac49407a7c0, type: 3}
 --- !u!4 &558519044
 Transform:
@@ -272,6 +273,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &800678045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1547717198468525889, guid: eddae528ee8a3704488ab79f8003efd6, type: 3}
+  m_PrefabInstance: {fileID: 3802454535754687531}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &800678049
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800678045}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f04aac32d9d634b46933f46593cb1c9e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1145882476
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +335,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -84}
+  m_AnchoredPosition: {x: 0, y: -81}
   m_SizeDelta: {x: 336, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1145882478
@@ -414,8 +442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13db307f409a6cd4b939badeeecc1374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AsteroidSpawner
-  rateGap: {x: 18, y: 600}
-  initialGapProgress: {x: 0, y: 450}
+  rateGap: {x: 15, y: 600}
+  initialGapProgress: {x: 15, y: 450}
   rateError: {x: 0.1, y: 5}
   density: {x: 2, y: 3}
   generalRoids:
@@ -434,19 +462,20 @@ MonoBehaviour:
   pickup:
   - {fileID: 5954303710576478060, guid: 02c728775d8d24c43a5a05a20aa60351, type: 3}
   speedrings:
+  - {fileID: 5954303710576478060, guid: a846b1980779cca4f9c0b9c0b1c5818f, type: 3}
   - {fileID: 5954303710576478060, guid: f9f5e3074f5d5d94eb7022ca7accf85d, type: 3}
-  generalWeight: 140
-  specialWeight: 60
-  megaWeight: 48
-  pickupWeight: 12
-  speedringWeight: 4000
+  generalWeight: 124
+  specialWeight: 48
+  megaWeight: 24
+  pickupWeight: 6
+  speedringWeight: 4
   spawnError: 0.15
   initialDensity: 1
   specialRoidDelay: 3
   megaroidActive: 0
   fieldWarningVisual: {fileID: 1145882480}
   fieldWarningTime: 3.12
-  fieldLife: {x: 8, y: 16}
+  fieldLife: {x: 5, y: 15}
   gameSpeedJump: 0.4
   generalBorder: 11
   megaroidBorder: 9
@@ -802,18 +831,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6789547011765966693, guid: eddae528ee8a3704488ab79f8003efd6, type: 3}
-      propertyPath: SizeModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6789547011765966693, guid: eddae528ee8a3704488ab79f8003efd6, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1547717198468525889, guid: eddae528ee8a3704488ab79f8003efd6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 800678049}
   m_SourcePrefab: {fileID: 100100000, guid: eddae528ee8a3704488ab79f8003efd6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

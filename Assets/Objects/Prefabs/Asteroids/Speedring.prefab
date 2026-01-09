@@ -24771,13 +24771,15 @@ MonoBehaviour:
   speedError: 2
   maxSpeed: 100
   maxRotSpeed: 40
+  scoreIncrease: -100
+  secondaryScoreIncrease: 200
   camOffset: 4
   camLeft: -20
   explosion: {fileID: 6233546986267221259}
   secondaryEffect: {fileID: 7504338917296795733}
   roidType: 7
-  gameSpeedJump: 1.5
-  maxHits: 0
+  gameSpeedJump: 1.8
+  maxHits: 1
 --- !u!60 &1373618074204290035
 PolygonCollider2D:
   m_ObjectHideFlags: 0

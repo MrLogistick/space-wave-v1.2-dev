@@ -7,6 +7,7 @@ public class ShipAbility : MonoBehaviour
 
     [SerializeField] int initialBullets;
     [SerializeField] int maxBullets;
+    [SerializeField] int overflowScore;
     int bulletCount;
 
     [SerializeField] GameObject bullet;
@@ -59,7 +60,11 @@ public class ShipAbility : MonoBehaviour
     }
 
     public void ChangeCountBy(int value) {
-        if (bulletCount == maxBullets) return;
+        if (bulletCount == maxBullets) {
+            GameManager.instance.score += overflowScore;
+            return;
+        }
+
         bulletCount += value;
     }
 }

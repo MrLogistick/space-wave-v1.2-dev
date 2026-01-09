@@ -5,9 +5,9 @@ public class PlayerController : MonoBehaviour
 {
     float currentSpeed;
     Vector2 clampDir = new Vector2(0f, -90f);
-    float currentRot;
+    float currentRot = -45f;
 
-    bool frozen;
+    bool frozen = true;
     [SerializeField] float borderPosition;
     int gravity = -1;
 
@@ -46,27 +46,30 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Mathf.Abs(transform.position.y) >= borderPosition && !frozen) { Die("Gravity", false); }
+        print(currentRot);
 
-        if (frozen) {
-            coll.enabled = false;
-        
-            foreach (var trail in trails) {
-                var emission = trail.emission;
-                emission.enabled = false;
-            }
-        }
+        if (Mathf.Abs(transform.position.y) >= borderPosition && !frozen) { Die("Gravity", false); }
+        coll.enabled = !frozen;
 
         if (!manager) return;
 
-        foreach (var trail in trails) {
-            var speed = trail.velocityOverLifetime;
-            speed.x = new ParticleSystem.MinMaxCurve(-manager.gameSpeed);
-        }
+        if(manager.postGame) {
+            var main = explosion.main;
+            main.simulationSpeed *= manager.endMultiplier;
 
-        if (!manager.postGame) return;
-        var main = explosion.main;
-        main.simulationSpeed *= manager.endMultiplier;
+            foreach (var trail in trails) {
+                var emission = trail.emission;
+                emission.enabled = false;
+
+                main = trail.main;
+                main.simulationSpeed *= manager.endMultiplier;
+            }
+        } else {
+            foreach (var trail in trails) {
+                var speed = trail.velocityOverLifetime;
+                speed.x = -manager.gameSpeed;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -88,6 +91,11 @@ public class PlayerController : MonoBehaviour
 
     public void AlterAbility() {
         ability.ChangeCountBy(1);
+    }
+
+    public void ApplyRootMotion() {
+        GetComponent<Animator>().applyRootMotion = true;
+        frozen = false;
     }
 
     public void Die(string deathBy, bool explode) {

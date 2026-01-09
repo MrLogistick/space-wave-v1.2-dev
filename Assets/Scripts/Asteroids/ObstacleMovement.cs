@@ -7,6 +7,8 @@ public class ObstacleMovement : MonoBehaviour {
     float speed;
     [SerializeField] float maxRotSpeed;
     float rotSpeed = 0f;
+    [SerializeField] int scoreIncrease;
+    [SerializeField] int secondaryScoreIncrease;
     [SerializeField] float camOffset;
     [HideInInspector] public float camLeft;
 
@@ -74,8 +76,10 @@ public class ObstacleMovement : MonoBehaviour {
     }
 
     public void Disable(bool explode) {
-        if (roidType == RoidType.Megaroid || roidType == RoidType.Tunnelroid) {
-            GetComponentInParent<AsteroidSpawner>().megaroidActive = false;
+        var spawner = GetComponentInParent<AsteroidSpawner>();
+
+        if (roidType == RoidType.Megaroid) {
+            spawner.megaroidActive = false;
         }
 
         if (explode && explosion) {
@@ -101,6 +105,14 @@ public class ObstacleMovement : MonoBehaviour {
                 vol.x = -1f * (manager.gameSpeed + currentSpeedError);
 
                 explosion.Play();
+
+                if (roidType == RoidType.Megaroid) {
+                    var rand = Random.Range(1, 6);
+                    for (int i = 0; i < rand; i++) {
+                        print("spawn");
+                        spawner.InstantiateAsteroid(spawner.generalRoids);
+                    }
+                }
             }
         }
         else {
@@ -112,6 +124,7 @@ public class ObstacleMovement : MonoBehaviour {
         if (!secondaryEffect) return;
         secondaryEffect.Play();
         manager.AlterGameSpeedBy(gameSpeedJump);
+        manager.score += secondaryScoreIncrease;
     }
 
     void OnParticleSystemStopped() {
@@ -128,6 +141,7 @@ public class ObstacleMovement : MonoBehaviour {
                 secondaryEffect.Play();
             }
 
+            manager.score += scoreIncrease;
             return;
         }
 

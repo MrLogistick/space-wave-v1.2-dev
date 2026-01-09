@@ -13,7 +13,7 @@ public class AsteroidSpawner : MonoBehaviour {
     float currentDensity = 0;
 
     [Header("Asteroids Extended")]
-    [SerializeField] GameObject[] generalRoids;
+    public GameObject[] generalRoids;
     [SerializeField] GameObject[] specialRoids;
     [SerializeField] GameObject[] megaRoids;
     [SerializeField] GameObject[] pickup;
@@ -128,7 +128,7 @@ public class AsteroidSpawner : MonoBehaviour {
         }
     }
 
-    void InstantiateAsteroid(GameObject[] list) {
+    public void InstantiateAsteroid(GameObject[] list) {
         if (list.Length < 1) return;
         var i = Random.Range(0, list.Length);
         var roid = Instantiate(list[i], transform);

@@ -172,6 +172,7 @@ MonoBehaviour:
   speedError: 2
   maxSpeed: 100
   maxRotSpeed: 100
+  scoreIncrease: 10
   camOffset: 3
   camLeft: -20
   explosion: {fileID: 2992111335371932376}

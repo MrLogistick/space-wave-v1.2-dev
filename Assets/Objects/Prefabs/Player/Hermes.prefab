@@ -14896,6 +14896,7 @@ MonoBehaviour:
   activated: 0
   initialBullets: 0
   maxBullets: 2
+  overflowScore: 1500
   bullet: {fileID: 3896608378518660786, guid: 867b412cb5fcd1943a3389616513a0d6, type: 3}
   shootPoint: {fileID: 6557655664999336324}
   secondShootPoint: {fileID: 4450510479414893734}
