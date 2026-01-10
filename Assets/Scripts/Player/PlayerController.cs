@@ -44,10 +44,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        print(currentRot);
-
+    void Update() {
         if (Mathf.Abs(transform.position.y) >= borderPosition && !frozen) { Die("Gravity", false); }
         coll.enabled = !frozen;
 
@@ -72,8 +69,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         if (frozen) return;
 
         currentSpeed += data.acceleration * gravity * Time.deltaTime;

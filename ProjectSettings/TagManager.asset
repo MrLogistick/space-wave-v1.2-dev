@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MainCanvas
   - Weapon
+  - Persistant
   layers:
   - Default
   - TransparentFX

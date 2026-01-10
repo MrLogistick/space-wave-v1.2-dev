@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BitmapText : MonoBehaviour {
     public string text;
     string previousText = "";
-    public int wordSpacing = 1;
+    public int wordSpacing = 6;
     int previousSpacing;
     public int fontSize = 3;
     int previousFontSize;

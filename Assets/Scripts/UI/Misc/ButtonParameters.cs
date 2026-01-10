@@ -7,15 +7,26 @@ public class ButtonParameters : MonoBehaviour,
     ISelectHandler,
     IDeselectHandler {
 
+    public bool toggleable;
+    public bool toggled;
+
     public bool newThing;
+    public bool secondExclamation;
+
     public bool hovered;
     public bool selected;
+
     public GameObject pin;
-    public GameObject excalmation;
+    public GameObject exclamation;
 
     void Update() {
-        if (!excalmation) return;
-        excalmation.SetActive(newThing);
+        if (!exclamation || secondExclamation) return;
+        exclamation.SetActive(newThing);
+    }
+
+    public void Reset() {
+        selected = false;
+        hovered = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData) {

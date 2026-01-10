@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class ShipsMenu : MonoBehaviour {
-    [SerializeField]  ButtonParameters[] buttons;
+    public ButtonParameters[] buttons;
     MenuManager manager;
 
     void Start() {
@@ -22,6 +22,11 @@ public class ShipsMenu : MonoBehaviour {
             else if (bp.hovered) {
                 bp.pin.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(null);
+
+                if (bp.exclamation) { bp.newThing = false; }
+            }
+            else if (manager.currentShip.ToString() == bp.name) {
+                bp.pin.SetActive(true);
             }
             else {
                 bp.pin.SetActive(false);
@@ -51,6 +56,7 @@ public class ShipsMenu : MonoBehaviour {
     public void Artemis() { manager.currentShip = MenuManager.ShipType.Artemis; }
 
     public void Back() {
+        buttons[9].Reset();
         manager.titleScreen.SetActive(true);
         gameObject.SetActive(false);
     }
