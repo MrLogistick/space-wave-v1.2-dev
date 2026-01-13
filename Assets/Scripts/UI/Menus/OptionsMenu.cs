@@ -76,11 +76,11 @@ public class OptionsMenu : MonoBehaviour {
 
         if (Keyboard.current.mKey.wasPressedThisFrame) { Music(); }
         if (Keyboard.current.xKey.wasPressedThisFrame) { SFX(); }
-        if (Keyboard.current.sKey.wasPressedThisFrame) { StaticStart(); }
-        if (Keyboard.current.tKey.wasPressedThisFrame) { Tutorial(); }
+        if (Keyboard.current.sKey.wasPressedThisFrame) { StaticStart(0); }
+        if (Keyboard.current.tKey.wasPressedThisFrame) { Tutorial(0); }
         if (Keyboard.current.eKey.wasPressedThisFrame) { EraseData(); }
-        if (Keyboard.current.fKey.wasPressedThisFrame) { Fullscreen(); }
-        if (Keyboard.current.cKey.wasPressedThisFrame) { TerminateCompanion(); }
+        if (Keyboard.current.fKey.wasPressedThisFrame) { Fullscreen(0); }
+        if (Keyboard.current.cKey.wasPressedThisFrame) { TerminateCompanion(0); }
         if (Keyboard.current.bKey.wasPressedThisFrame) { Back(); }
     }
 
@@ -106,9 +106,14 @@ public class OptionsMenu : MonoBehaviour {
         }
     }
 
-    public void Tutorial() { // Toggleable
+    public void Tutorial(int specific) { // Toggleable
         var b = buttons[2];
-        b.toggled = !b.toggled;
+        if (specific == 0) {
+            b.toggled = !b.toggled;
+        }
+        else {
+            b.toggled = specific > 1 ? true : false;
+        }
 
         PlayerPrefs.SetInt("Tutorial", b.toggled ? 1 : 0);
     }
@@ -119,29 +124,47 @@ public class OptionsMenu : MonoBehaviour {
             PlayerPrefs.DeleteAll();
 
             PlayerPrefs.SetInt("Athena_Unlocked", 2);
+            Tutorial(2);
+            StaticStart(1);
+            TerminateCompanion(1);
         }
         else {
             buttons[3].exclamation.SetActive(true);
         }
     }
 
-    public void StaticStart() { // Toggleable
+    public void StaticStart(int specific) { // Toggleable
         var b = buttons[4];
-        b.toggled = !b.toggled;
+        if (specific == 0) {
+            b.toggled = !b.toggled;
+        }
+        else {
+            b.toggled = specific > 1 ? true : false;
+        }
 
         PlayerPrefs.SetInt("StaticStart", b.toggled ? 1 : 0);
     }
 
-    public void Fullscreen() { // Toggleable
+    public void Fullscreen(int specific) { // Toggleable
         var b = buttons[5];
-        b.toggled = !b.toggled;
+        if (specific == 0) {
+            b.toggled = !b.toggled;
+        }
+        else {
+            b.toggled = specific > 1 ? true : false;
+        }
 
         PlayerPrefs.SetInt("Fullscreen", b.toggled ? 1 : 0);
     }
 
-    public void TerminateCompanion() { // Toggleable
+    public void TerminateCompanion(int specific) { // Toggleable
         var b = buttons[6];
-        b.toggled = !b.toggled;
+        if (specific == 0) {
+            b.toggled = !b.toggled;
+        }
+        else {
+            b.toggled = specific > 1 ? true : false;
+        }
 
         PlayerPrefs.SetInt("Companion", b.toggled ? 1 : 0);
     }

@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     float currentRot = -45f;
 
     bool frozen = true;
+    bool canStart = false;
+
     [SerializeField] float borderPosition;
     int gravity = -1;
 
@@ -38,7 +40,7 @@ public class PlayerController : MonoBehaviour
             trails = prefab.trails;
             coll = prefab.coll;
 
-            currentRot = ship.rotation.z;
+            ship.rotation = Quaternion.Euler(0f, 0f, currentRot);
 
             coll.enabled = collisionsEnabled ? true : false;
         }
@@ -46,11 +48,9 @@ public class PlayerController : MonoBehaviour
 
     void Update() {
         if (Mathf.Abs(transform.position.y) >= borderPosition && !frozen) { Die("Gravity", false); }
-        coll.enabled = !frozen;
 
         if (!manager) return;
-
-        if(manager.postGame) {
+        if (manager.postGame) {
             var main = explosion.main;
             main.simulationSpeed *= manager.endMultiplier;
 
@@ -61,10 +61,11 @@ public class PlayerController : MonoBehaviour
                 main = trail.main;
                 main.simulationSpeed *= manager.endMultiplier;
             }
-        } else {
+        }
+        else {
             foreach (var trail in trails) {
                 var speed = trail.velocityOverLifetime;
-                speed.x = -manager.gameSpeed;
+                speed.x = -manager.rawSpeed;
             }
         }
     }
@@ -91,22 +92,36 @@ public class PlayerController : MonoBehaviour
 
     public void ApplyRootMotion() {
         GetComponent<Animator>().applyRootMotion = true;
+        coll.enabled = true;
+        canStart = true;
+
+        if (PlayerPrefs.GetInt("StaticStart", 0) == 1) return;
         frozen = false;
     }
 
     public void Die(string deathBy, bool explode) {
         frozen = true;
+        coll.enabled = false;
         manager.TriggerPostGame(deathBy);
 
         if (explode) {
             ship.GetComponent<SpriteRenderer>().enabled = false;
-            coll.enabled = false;
             ability.gameObject.SetActive(false);
 
             explosion.Play();
         }
     }
 
-    public void FlipGravity(InputAction.CallbackContext context) { if (context.performed && !frozen) gravity *= -1; }
+    public void FlipGravity(InputAction.CallbackContext context) {
+        if (context.performed && !manager.postGame) {
+            if (frozen) {
+                if (!canStart) return;
+                frozen = false;
+            }
+
+            gravity *= -1;
+        }
+    }
+
     public void ActivateAbility(InputAction.CallbackContext context) { if (context.performed && !ability.activated && !frozen) ability.activated = true; }
 }

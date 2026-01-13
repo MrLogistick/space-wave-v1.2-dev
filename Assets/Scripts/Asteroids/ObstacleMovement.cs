@@ -3,17 +3,16 @@ using UnityEngine;
 public class ObstacleMovement : MonoBehaviour {
     [SerializeField] float speedError;
     float currentSpeedError;
-    [SerializeField] float maxSpeed;
     float speed;
     [SerializeField] float maxRotSpeed;
     float rotSpeed = 0f;
+    
     [SerializeField] int scoreIncrease;
-    [SerializeField] int secondaryScoreIncrease;
-    [SerializeField] float camOffset;
+
+    public float camOffset;
     [HideInInspector] public float camLeft;
 
     [SerializeField] ParticleSystem explosion;
-    [SerializeField] ParticleSystem secondaryEffect;
 
     public RoidType roidType;
     public enum RoidType {
@@ -27,11 +26,8 @@ public class ObstacleMovement : MonoBehaviour {
         Speedring
     }
 
-    [SerializeField] float gameSpeedJump;
+    [SerializeField] AsteroidAbility ability;
     GameManager manager;
-
-    [SerializeField] int maxHits;
-    int hits = 0;
 
     void Start() {
         manager = GameManager.instance;
@@ -41,7 +37,8 @@ public class ObstacleMovement : MonoBehaviour {
 
         if (roidType == RoidType.Pickup || roidType == RoidType.Tunnelroid) {
             transform.rotation = Quaternion.identity;
-        } else {
+        }
+        else {
             transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
         }
 
@@ -52,8 +49,10 @@ public class ObstacleMovement : MonoBehaviour {
             Disable(false);
         }
         else {
-            speed = manager.gameSpeed + currentSpeedError;
-            speed = Mathf.Clamp(speed, 0f, maxSpeed);
+            speed = manager.rawSpeed + currentSpeedError;
+
+            float speedOffset = roidType == RoidType.Pickup ? -10f : 10f;
+            speed = Mathf.Min(speed, manager.publicMaxSpeed + speedOffset);
 
             transform.position -= Vector3.right * speed * Time.deltaTime;
             transform.rotation *= Quaternion.Euler(0f, 0f, rotSpeed * Time.deltaTime);
@@ -66,13 +65,23 @@ public class ObstacleMovement : MonoBehaviour {
             if (explosion) {
                 var main = explosion.main;
                 main.simulationSpeed *= manager.endMultiplier;
-            }
 
-            if (secondaryEffect) {
-                var main = secondaryEffect.main;
-                main.simulationSpeed *= manager.endMultiplier;
+                if (roidType != RoidType.Speedring) return;
+                for (var i = 0; i < explosion.transform.childCount; i++) {
+                    main = explosion.transform.GetChild(i).GetComponent<ParticleSystem>().main;
+                    main.simulationSpeed *= manager.endMultiplier;                
+                }
             }
         }
+    }
+
+    public void FireAbility() {
+        if (!ability) {
+            Debug.LogError($"{gameObject.name}'s ability is inaccessible.");
+            return;
+        }
+
+        ability.Fire();
     }
 
     public void Disable(bool explode) {
@@ -95,23 +104,23 @@ public class ObstacleMovement : MonoBehaviour {
                 transform.GetChild(1).gameObject.SetActive(false);
 
                 for (var i = 0; i < explosion.transform.childCount; i++) {
-                    explosion.transform.GetChild(i).GetComponent<ParticleSystem>().Play();
+                    var e = explosion.transform.GetChild(i).GetComponent<ParticleSystem>();
+
+                    var vol = e.velocityOverLifetime;
+                    vol.x = -1f * (manager.rawSpeed + currentSpeedError);
+                    e.Play();
                 }
             }
             else {
                 GetComponent<SpriteRenderer>().enabled = false;
 
                 var vol = explosion.velocityOverLifetime;
-                vol.x = -1f * (manager.gameSpeed + currentSpeedError);
+                vol.x = -1f * (manager.rawSpeed + currentSpeedError);
 
                 explosion.Play();
 
                 if (roidType == RoidType.Megaroid) {
-                    var rand = Random.Range(1, 6);
-                    for (int i = 0; i < rand; i++) {
-                        print("spawn");
-                        spawner.InstantiateAsteroid(spawner.generalRoids);
-                    }
+                    FireAbility();
                 }
             }
         }
@@ -120,28 +129,15 @@ public class ObstacleMovement : MonoBehaviour {
         }
     }
 
-    public void SpeedRingEffect() {
-        if (!secondaryEffect) return;
-        secondaryEffect.Play();
-        manager.AlterGameSpeedBy(gameSpeedJump);
-        manager.score += secondaryScoreIncrease;
-    }
-
     void OnParticleSystemStopped() {
         Destroy(gameObject);
     }
 
     void HandleCollision(Transform other) {
-        if (other.CompareTag("Weapon")) {
-            hits++;
+        if (other.CompareTag("Weapon") && roidType != RoidType.Megaroid && roidType != RoidType.Tunnelroid) {
+            manager.AlterScoreBy(scoreIncrease);
+            Disable(true);
 
-            if (hits >= maxHits) {
-                Disable(true);
-            } else {
-                secondaryEffect.Play();
-            }
-
-            manager.score += scoreIncrease;
             return;
         }
 
@@ -149,14 +145,13 @@ public class ObstacleMovement : MonoBehaviour {
         var obj = other.GetComponent<ObstacleMovement>();
 
         switch(roidType) {
+            case RoidType.Megaroid:
+            case RoidType.Tunnelroid:
+                break;
             case RoidType.Speedring:
                 if (obj.roidType == RoidType.Megaroid) {
                     Disable(true);
                 }
-                break;
-            case RoidType.Megaroid:
-                break;
-            case RoidType.Tunnelroid:
                 break;
             default:
                 if (obj.roidType != RoidType.Speedring && obj.roidType != RoidType.Pickup) {

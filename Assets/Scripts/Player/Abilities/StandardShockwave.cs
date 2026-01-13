@@ -12,18 +12,17 @@ public class StandardShockwave : MonoBehaviour
     [SerializeField] float scaleMultiplier;
     float currentScale;
 
-    [SerializeField] Sprite[] stages;
-
     [SerializeField] float lifetime;
     float lifetimeElapsed = 0f;
 
-    SpriteRenderer sr;
+    float time;
+    float slowDown = 1f;
+
+    [HideInInspector] public GameManager manager;
 
     void Start() {
-        sr = GetComponent<SpriteRenderer>();
-
         currentSpeed = initialSpeed;
-        transform.localScale = Vector3.one * initialSize;
+        currentScale = initialSize;
     }
 
     void Update() {
@@ -31,15 +30,23 @@ public class StandardShockwave : MonoBehaviour
             Destroy(gameObject);
         }
         else {
-            lifetimeElapsed += Time.deltaTime;
-            // float currentStage = Mathf.Clamp(lifetimeElapsed / (lifetime / stages.Length), 0, stages.Length - 1);
-            // sr.sprite = stages[Mathf.FloorToInt(currentStage)];
 
-            currentSpeed += acceleration * Time.deltaTime;
+            if (manager.postGame) {
+                slowDown *= manager.endMultiplier;
+                time = Time.deltaTime * slowDown;
+                GetComponent<EdgeCollider2D>().enabled = false;
+            }
+            else {
+                time = Time.deltaTime;
+            }
+
+            lifetimeElapsed += time;
+
+            currentSpeed += acceleration * time;
             currentSpeed = Mathf.Clamp(currentSpeed, 0f, topSpeed);
-            transform.position += Vector3.right * currentSpeed * Time.deltaTime;
+            transform.position += Vector3.right * currentSpeed * time;
 
-            currentScale += scaleMultiplier * Time.deltaTime;
+            currentScale += scaleMultiplier * time;
             currentScale = Mathf.Clamp(currentScale, 0f, maxScale);
             transform.localScale = Vector3.one * currentScale;
         }

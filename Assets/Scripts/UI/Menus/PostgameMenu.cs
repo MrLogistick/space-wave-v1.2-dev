@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PostgameMenu : MonoBehaviour {
     [SerializeField] BitmapText deathMsg;
+    [SerializeField] BitmapText speed;
     [SerializeField] BitmapText highscoreText;
     [SerializeField] Animator highscore;
 
@@ -19,6 +20,7 @@ public class PostgameMenu : MonoBehaviour {
         }
 
         highscoreText.text = $"{manager.highscore:0000000000}";
+        speed.text = $"{manager.topSpeed:00.0}%";
 
         switch (manager.attempts) {
             default:

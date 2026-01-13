@@ -38,6 +38,6 @@ public class Stars : MonoBehaviour
 
         // Speed
         var main = ps.main;
-        main.simulationSpeed = GameManager.instance.gameSpeed / 10f;
+        main.simulationSpeed = GameManager.instance.rawSpeed / 5f;
     }
 }

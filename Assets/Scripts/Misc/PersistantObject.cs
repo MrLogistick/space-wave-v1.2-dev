@@ -12,4 +12,9 @@ public class PersistantObject : MonoBehaviour {
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    void Update() {
+        Screen.fullScreenMode = PlayerPrefs.GetInt("Fullscreen", 1) == 1
+            ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+    }
 }

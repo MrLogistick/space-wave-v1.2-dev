@@ -7,12 +7,23 @@ public class PlayerCollisions : MonoBehaviour {
         controller = transform.parent.parent.GetComponent<PlayerController>();
     }
 
-    void OnCollisionEnter2D(Collision2D other) {
-        if (!other.gameObject.GetComponent<ObstacleMovement>()) return;
-        var obj = other.gameObject.GetComponent<ObstacleMovement>();
-        
+    void HandleCollision(Transform other) {
+
+        // If player touches a weapon without SafeForPlayer
+        if (other.GetComponent<SafeForPlayer>()) return;
+        if (!other.GetComponent<ObstacleMovement>()) {
+            if (other.CompareTag("Weapon")) {
+                controller.Die("ASBroid", true);
+            }
+
+            return;
+        }
+
+        // Asteroid Collisions
+        var obj = other.GetComponent<ObstacleMovement>();
         switch (obj.roidType) {
             case ObstacleMovement.RoidType.Asteroid:
+            case ObstacleMovement.RoidType.Asbroid:
                 obj.Disable(true);
                 controller.Die("Asteroid", true);
                 break;
@@ -24,31 +35,27 @@ public class PlayerCollisions : MonoBehaviour {
                 obj.Disable(true);
                 controller.Die("Bombroid", true);
                 break;
-            case ObstacleMovement.RoidType.Asbroid:
-                obj.Disable(true);
-                controller.Die("ASBroid", true);
-                break;
             case ObstacleMovement.RoidType.Megaroid:
                 controller.Die("Megaroid", true);
                 break;
             case ObstacleMovement.RoidType.Tunnelroid:
                 controller.Die("Tunnelroid", true);
                 break;
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
-        if (!other.gameObject.GetComponent<ObstacleMovement>()) return;
-        var obj = other.gameObject.GetComponent<ObstacleMovement>();
-
-        switch (obj.roidType) {
             case ObstacleMovement.RoidType.Pickup:
                 obj.Disable(true);
                 controller.AlterAbility();
                 break;
             case ObstacleMovement.RoidType.Speedring:
-                obj.SpeedRingEffect();
+                obj.FireAbility();
                 break;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        HandleCollision(other.transform);
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        HandleCollision(other.transform);
     }
 }

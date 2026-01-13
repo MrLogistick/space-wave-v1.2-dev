@@ -8,7 +8,7 @@ public class ScenesView : EditorWindow
     Texture2D trashIcon;
     Texture2D pencilIcon;
 
-    bool simple = false;
+    bool simple = true;
 
     void OnEnable()
     {

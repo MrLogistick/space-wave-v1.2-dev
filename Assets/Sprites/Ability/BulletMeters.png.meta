@@ -200,7 +200,7 @@ TextureImporter:
         width: 49
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -222,7 +222,7 @@ TextureImporter:
         width: 9
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -231,6 +231,28 @@ TextureImporter:
       bones: []
       spriteID: a71677e5edce5134fbde429f2fd6626e
       internalID: 187590677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bullet
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1
+        width: 4
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d2649a493bbbaa498eab7c827672d8b
+      internalID: -1096184909
       vertices: []
       indices: 
       edges: []
@@ -252,6 +274,7 @@ TextureImporter:
       10bullets: 1181831971
       2bullets: 187590677
       5bullets: -8085671701296843257
+      Bullet: -1096184909
       BulletMeters_1: 2204178991415934328
       BulletMeters_10: 1285553113666139914
       BulletMeters_11: 3944904103985149951

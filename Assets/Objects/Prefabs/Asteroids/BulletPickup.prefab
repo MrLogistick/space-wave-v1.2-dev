@@ -5001,14 +5001,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
   speedError: 2
-  maxSpeed: 100
+  maxSpeed: 35
   maxRotSpeed: 0
+  scoreIncrease: 0
   camOffset: 2
   camLeft: -20
   explosion: {fileID: 1550083566394992910}
-  secondaryEffect: {fileID: 0}
   roidType: 6
-  gameSpeedJump: 0
+  ability: {fileID: 0}
 --- !u!60 &-6139727908496160192
 PolygonCollider2D:
   m_ObjectHideFlags: 0

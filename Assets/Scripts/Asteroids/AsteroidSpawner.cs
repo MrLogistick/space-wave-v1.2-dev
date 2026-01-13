@@ -37,21 +37,15 @@ public class AsteroidSpawner : MonoBehaviour {
     [Space]
     [SerializeField] Vector2 fieldLife;
     int fieldsEndured;
-    [Space]
-    [SerializeField] float gameSpeedJump;
 
     [Header("Borders")]
     [SerializeField] float generalBorder;
     [SerializeField] float megaroidBorder;
-    [SerializeField] float posOffset;
 
     GameManager manager;
     [SerializeField] Camera cam;
 
     IEnumerator Start() {
-        var x = cam.transform.position.x + posOffset + cam.orthographicSize * cam.aspect;
-        transform.position = new Vector2(x, 0f);
-
         currentDensity = initialDensity;
 
         manager = GameManager.instance;
@@ -69,15 +63,15 @@ public class AsteroidSpawner : MonoBehaviour {
     }
 
     IEnumerator AsteroidSpawn(bool initial) {
-        while (manager.gameSpeed > 0.5f) {
+        while (manager.rawSpeed > 0.5f) {
             float rate;
 
             if (initial) {
                 initial = false;
-                rate = initialGapProgress.x / manager.gameSpeed;
+                rate = initialGapProgress.x / manager.rawSpeed;
             }
             else {
-                rate = rateGap.x / manager.gameSpeed;
+                rate = rateGap.x / manager.rawSpeed;
             }
             
             rate += Random.Range(-rateError.x, rateError.x);
@@ -135,6 +129,7 @@ public class AsteroidSpawner : MonoBehaviour {
         var roidScript = roid.GetComponent<ObstacleMovement>();
 
         roidScript.camLeft = cam.transform.position.x - cam.orthographicSize * cam.aspect;
+        var camRight = cam.transform.position.x + cam.orthographicSize * cam.aspect;
 
         float roidPos;
         switch (roidScript.roidType) {
@@ -149,7 +144,7 @@ public class AsteroidSpawner : MonoBehaviour {
                 break;
         }
 
-        roid.transform.position = new Vector2(transform.position.x, roidPos);
+        roid.transform.position = new Vector2(camRight + roidScript.camOffset, roidPos);
     }
 
     IEnumerator FieldSpawn(bool initial) {
@@ -158,10 +153,10 @@ public class AsteroidSpawner : MonoBehaviour {
 
             if (initial) {
                 initial = false;
-                rate = initialGapProgress.y / manager.gameSpeed;
+                rate = initialGapProgress.y / manager.rawSpeed;
             }
             else {
-                rate = rateGap.y / manager.gameSpeed;
+                rate = rateGap.y / manager.rawSpeed;
             }
 
             rate += Random.Range(-rateError.y, rateError.y);
@@ -179,7 +174,6 @@ public class AsteroidSpawner : MonoBehaviour {
 
             fieldsEndured++;
             currentDensity = density.x;
-            manager.AlterGameSpeedBy(gameSpeedJump);
 
             InstantiateAsteroid(speedrings);
             fieldWarningVisual.SetTrigger("Switch");

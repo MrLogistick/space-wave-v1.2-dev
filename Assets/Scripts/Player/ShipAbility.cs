@@ -53,7 +53,8 @@ public class ShipAbility : MonoBehaviour
             if (bulletCount <= 0) return;
             
             bulletCount--;
-            Instantiate(bullet, currentPoint.position, bullet.transform.rotation);
+            var instance = Instantiate(bullet, currentPoint.position, bullet.transform.rotation);
+            instance.GetComponent<StandardShockwave>().manager = GameManager.instance;
         }
 
         fill.fillAmount = bulletCount / (float)maxBullets;
@@ -61,7 +62,7 @@ public class ShipAbility : MonoBehaviour
 
     public void ChangeCountBy(int value) {
         if (bulletCount == maxBullets) {
-            GameManager.instance.score += overflowScore;
+            GameManager.instance.AlterScoreBy(overflowScore);
             return;
         }
 

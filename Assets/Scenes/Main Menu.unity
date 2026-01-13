@@ -451,7 +451,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1081783335}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: StaticStart
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4025,7 +4025,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1081783335}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: Fullscreen
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4915,7 +4915,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1081783335}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: Tutorial
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5390,7 +5390,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1081783335}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: TerminateCompanion
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

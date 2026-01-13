@@ -179,16 +179,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
   speedError: 2
-  maxSpeed: 100
+  maxSpeed: 50
   maxRotSpeed: 60
   scoreIncrease: 10
   camOffset: 5
   camLeft: -20
   explosion: {fileID: 5320891784546478452}
-  secondaryEffect: {fileID: 0}
   roidType: 0
-  gameSpeedJump: 0
-  maxHits: 1
+  ability: {fileID: 0}
 --- !u!50 &-732913829813544485
 Rigidbody2D:
   serializedVersion: 5
