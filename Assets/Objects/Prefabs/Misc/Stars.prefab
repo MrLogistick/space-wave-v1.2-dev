@@ -4807,9 +4807,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingLayerID: -66262403
+  m_SortingLayer: -1
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4856,7 +4856,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScaleByCamera
   offset: 5
   threshold: 10
-  cam: {fileID: 0}
 --- !u!1 &9081950611172659872
 GameObject:
   m_ObjectHideFlags: 0

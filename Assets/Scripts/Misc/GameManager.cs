@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField] float maxSpeed;
     [SerializeField] float returnRate;
 
+    [SerializeField] float totalGain;
+    [SerializeField] float gainTime;
+    [SerializeField] float midGame;
+
     public float publicMaxSpeed { private set; get; }
 
     float gameSpeed;
@@ -16,7 +20,6 @@ public class GameManager : MonoBehaviour {
 
     float gametime;
     public int score { private set; get; }
-    float scoreFloat;
     public int highscore;
     public int attempts;
 
@@ -68,11 +71,21 @@ public class GameManager : MonoBehaviour {
             rawSpeed *= endMultiplier;
         }
         else {
-            scoreFloat += rawSpeed * Time.deltaTime;
-            score += (int)scoreFloat;
+            gametime += Time.deltaTime;
+            if (gametime >= 1f) {
+                score += (int)rawSpeed / 10;
+                gametime = 0;
+            }
 
             gameSpeed += Time.deltaTime * speedIncrease;
-            float desiredSpeed = (maxSpeed + 10f) * (gameSpeed / (gameSpeed + 30f));
+            float desiredSpeed;
+            
+            if (gameSpeed < midGame) {
+                desiredSpeed = gameSpeed;
+            }
+            else {
+                desiredSpeed = maxSpeed - totalGain * (1f - Mathf.Exp(-(gameSpeed - midGame) / gainTime));
+            }
 
             if (rawSpeed > desiredSpeed) {
                 rawSpeed -= Time.deltaTime * returnRate;

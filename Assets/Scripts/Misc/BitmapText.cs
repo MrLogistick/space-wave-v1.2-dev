@@ -1,24 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class BitmapText : MonoBehaviour {
     public string text;
     string previousText = "";
+
     public int wordSpacing = 6;
     int previousSpacing;
+
     public int fontSize = 3;
     int previousFontSize;
+
     public bool centred = false;
     bool previousAlignment;
+
     public bool flash = false;
     bool previousStyle;
+
+    public bool wrapping = false;
+    bool previousWrapping;
+
     public bool visible = true;
 
     int changes = 0;
 
     Dictionary<char, Sprite> font = new();
     Dictionary<char, Sprite> flashFont = new();
+
+    RectTransform rt;
 
     void Awake() {
         SetupDictionary("SpaceWaver", font);
@@ -68,6 +79,10 @@ public class BitmapText : MonoBehaviour {
         }
     }
 
+    void Start() {
+        rt = GetComponent<RectTransform>();
+    }
+
     void Update() {
         changes = 0;
 
@@ -76,6 +91,7 @@ public class BitmapText : MonoBehaviour {
         if (previousFontSize != fontSize) { previousFontSize = fontSize; changes++; }
         if (previousAlignment != centred) { previousAlignment = centred; changes++; }
         if (previousStyle != flash) { previousStyle = flash; changes++; }
+        if (previousWrapping != wrapping) { previousWrapping = wrapping; changes++; }
 
         for (int i = 0; i < transform.childCount; i++) {
             transform.GetChild(i).gameObject.SetActive(visible ? true : false);
@@ -91,6 +107,10 @@ public class BitmapText : MonoBehaviour {
         }
     }
 
+    float Centre(float value) {
+        return centred ? value / -2f : 0f;
+    }
+
     void DrawText(Dictionary<char, Sprite> letterStyle) {
         float totalWidth = 0f;
         foreach (char raw in text) {
@@ -103,8 +123,24 @@ public class BitmapText : MonoBehaviour {
             totalWidth += (sprite.rect.width + ThinLetters(c)) * fontSize;
         }
 
-        float x = centred ? totalWidth / -2f : 0f;
+        List<float> lineLength = new List<float>();
+        if (totalWidth > rt.rect.width && wrapping) {
+            int count = Mathf.FloorToInt(totalWidth / rt.rect.width);
+            for (int i = 0; i < count; i++) {
+                lineLength.Add(rt.rect.width);
+            }
+            
+            float remainder = totalWidth % rt.rect.width;
+            if (remainder > 0f) {
+                lineLength.Add(remainder);
+            }
+        }
+        else {
+            lineLength.Add(totalWidth);
+        }
 
+        int currentLine = 0;
+        float x = centred ? lineLength[currentLine] / -2f : 0f;
         foreach (char raw in text) {
             char c = char.ToUpper(raw);
             Sprite sprite;
@@ -118,12 +154,19 @@ public class BitmapText : MonoBehaviour {
                     break;
             }
 
+            if (x >= (centred ? lineLength[currentLine] / 2f : lineLength[currentLine])) {
+                currentLine++;
+                x = centred ? lineLength[currentLine] / -2f : 0f;
+            }
+
             var obj = new GameObject(c.ToString(), typeof(RectTransform), typeof(CanvasRenderer));
-            var rt = obj.GetComponent<RectTransform>();
+            var childrt = obj.GetComponent<RectTransform>();
+
+            float pos = x - (centred ? 0f : rt.rect.xMax);
 
             obj.transform.SetParent(transform, false);
-            rt.anchoredPosition = new Vector2(x + sprite.rect.width * fontSize / 2f, 0);
-            rt.sizeDelta = new Vector2(sprite.rect.width, sprite.rect.height) * fontSize;
+            childrt.anchoredPosition = new Vector2(pos + sprite.rect.width * fontSize / 2f, currentLine * -sprite.rect.height * fontSize);
+            childrt.sizeDelta = new Vector2(sprite.rect.width, sprite.rect.height) * fontSize;
 
             var image = obj.AddComponent<Image>();
             image.sprite = sprite;

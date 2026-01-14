@@ -247,11 +247,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
   speedError: 0
-  maxSpeed: 50
+  speed: 0
   maxRotSpeed: 20
-  scoreIncrease: 15
+  scoreIncrease: 20
   camOffset: 8.5
   camLeft: -20
+  radius: 8
+  overrideSpeed: 0
   explosion: {fileID: 1366310278349766616}
   roidType: 1
   ability: {fileID: 9098842980131647369}
@@ -269,7 +271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaroidEffect
   maxHits: 2
   spawnVariability: {x: 3, y: 6}
-  size: 8
   hitEffect: {fileID: 6929234772927140965}
 --- !u!1001 &1948352184252568757
 PrefabInstance:

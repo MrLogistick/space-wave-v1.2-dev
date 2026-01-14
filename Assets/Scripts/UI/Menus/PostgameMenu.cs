@@ -22,15 +22,18 @@ public class PostgameMenu : MonoBehaviour {
         highscoreText.text = $"{manager.highscore:0000000000}";
         speed.text = $"{manager.topSpeed:00.0}%";
 
+        // 34 chars per line at 600 width
+        var skip = false;
         switch (manager.attempts) {
-            default:
-                break;
             case 1:
                 deathMsg.text = Random.value > 0.5f ?
-                    "" :
+                    "Not the first to fall victim to   the gravity graveyard." :
                     "";
+                skip = true;
                 break;
         }
+
+        if (skip) return;
 
         switch (manager.deathBy) {
             case "Gravity":
@@ -43,7 +46,32 @@ public class PostgameMenu : MonoBehaviour {
                     "" :
                     "";
                 break;
+            case "ASBroid":
+                deathMsg.text = Random.value > 0.5f ?
+                    "" :
+                    "";
+                break;
+            case "Bombroid":
+                deathMsg.text = Random.value > 0.5f ?
+                    "Orange is not always the friendly colour." :
+                    "Wrong wire! Too late...";
+                break;
             case "Shipwreck":
+                deathMsg.text = Random.value > 0.5f ?
+                    "" :
+                    "";
+                break;
+            case "ShipwreckBullet":
+                deathMsg.text = Random.value > 0.5f ?
+                    "" :
+                    "";
+                break;
+            case "Megaroid":
+                deathMsg.text = Random.value > 0.5f ?
+                    "" :
+                    "";
+                break;
+            case "Tunnelroid":
                 deathMsg.text = Random.value > 0.5f ?
                     "" :
                     "";

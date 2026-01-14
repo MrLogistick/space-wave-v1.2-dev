@@ -252,8 +252,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   initialGameSpeed: 15
   speedIncrease: 0.01
-  maxSpeed: 35
+  maxSpeed: 45
   returnRate: 1.5
+  totalGain: 15
+  gainTime: 25
+  midGame: 30
   endMultiplier: 0.99
   highscore: 0
   attempts: 0
@@ -433,6 +436,11 @@ MonoBehaviour:
   - {fileID: 5954303710576478060, guid: 26a7f009de7c9eb46ba18d208583c255, type: 3}
   - {fileID: 5954303710576478060, guid: 2142d5424f95b0242a0b6a394cd9268f, type: 3}
   - {fileID: 5954303710576478060, guid: 421f0e11c659dad419ccf10c6cdfa252, type: 3}
+  - {fileID: 5954303710576478060, guid: 41f9a25af8ff32143a01be2903413734, type: 3}
+  - {fileID: 5954303710576478060, guid: e00c3212f0b4c67419c5083d9f5027fa, type: 3}
+  - {fileID: 5954303710576478060, guid: b0dc54ad70f9bec45852bdcf2817e6c5, type: 3}
+  - {fileID: 5954303710576478060, guid: 0b4bc7ea5e7c36e41b3798b8982a23e5, type: 3}
+  - {fileID: 5954303710576478060, guid: c3bc091812b6b33429d43e784b2ab9a9, type: 3}
   megaRoids:
   - {fileID: 5954303710576478060, guid: 5c5df818ac00ce14ead5293abaada0e1, type: 3}
   pickup:
@@ -441,7 +449,7 @@ MonoBehaviour:
   - {fileID: 5954303710576478060, guid: a846b1980779cca4f9c0b9c0b1c5818f, type: 3}
   - {fileID: 5954303710576478060, guid: f9f5e3074f5d5d94eb7022ca7accf85d, type: 3}
   generalWeight: 124
-  specialWeight: 48
+  specialWeight: 48000
   megaWeight: 24
   pickupWeight: 10
   speedringWeight: 4

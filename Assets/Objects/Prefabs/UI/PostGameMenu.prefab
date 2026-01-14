@@ -235,6 +235,7 @@ MonoBehaviour:
   fontSize: 3
   centred: 1
   flash: 0
+  wrapping: 0
   visible: 1
 --- !u!1 &3164938303319135662
 GameObject:
@@ -299,6 +300,7 @@ MonoBehaviour:
   fontSize: 3
   centred: 1
   flash: 0
+  wrapping: 0
   visible: 1
 --- !u!95 &5516935486367976863
 Animator:
@@ -384,6 +386,7 @@ MonoBehaviour:
   fontSize: 3
   centred: 1
   flash: 0
+  wrapping: 0
   visible: 1
 --- !u!1 &4737029030729251524
 GameObject:
@@ -419,7 +422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60}
+  m_AnchoredPosition: {x: -5, y: 60}
   m_SizeDelta: {x: 600, y: 27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3411686761888375421
@@ -443,10 +446,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BitmapText
   text: Death Message
-  wordSpacing: 1
+  wordSpacing: 6
   fontSize: 3
   centred: 1
   flash: 0
+  wrapping: 1
   visible: 1
 --- !u!1 &4972807697514861471
 GameObject:

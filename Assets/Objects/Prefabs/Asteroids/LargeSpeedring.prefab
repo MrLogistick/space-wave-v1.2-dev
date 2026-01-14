@@ -14885,7 +14885,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 14
+  m_SortingOrder: 11
   m_Sprite: {fileID: -2544841761609911580, guid: 888994e24bd67f64db8302bd9ab3903e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -19869,7 +19869,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 20
   m_Sprite: {fileID: 4102357029984451274, guid: 888994e24bd67f64db8302bd9ab3903e, type: 3}
   m_Color: {r: 1, g: 0.27450982, b: 0, a: 1}
   m_FlipX: 0
@@ -34659,6 +34659,7 @@ MonoBehaviour:
   scoreIncrease: -100
   camOffset: 4
   camLeft: -20
+  radius: 7
   explosion: {fileID: 6233546986267221259}
   roidType: 7
   ability: {fileID: 1073193305255595121}
@@ -39650,7 +39651,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 21
   m_Sprite: {fileID: 3288744067962186830, guid: 888994e24bd67f64db8302bd9ab3903e, type: 3}
   m_Color: {r: 1, g: 0.27450982, b: 0, a: 1}
   m_FlipX: 0
@@ -44634,7 +44635,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 20
   m_Sprite: {fileID: -2469654261982286898, guid: 888994e24bd67f64db8302bd9ab3903e, type: 3}
   m_Color: {r: 1, g: 0.27450982, b: 0, a: 1}
   m_FlipX: 0
@@ -44725,7 +44726,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 21
   m_Sprite: {fileID: 2235833779791559517, guid: 888994e24bd67f64db8302bd9ab3903e, type: 3}
   m_Color: {r: 1, g: 0.27450982, b: 0, a: 1}
   m_FlipX: 0
@@ -44816,7 +44817,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 21
   m_Sprite: {fileID: -4034068842156668555, guid: 888994e24bd67f64db8302bd9ab3903e, type: 3}
   m_Color: {r: 1, g: 0.27450982, b: 0, a: 1}
   m_FlipX: 0
@@ -49800,7 +49801,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 20
   m_Sprite: {fileID: -7586089399768820171, guid: 888994e24bd67f64db8302bd9ab3903e, type: 3}
   m_Color: {r: 1, g: 0.27450982, b: 0, a: 1}
   m_FlipX: 0

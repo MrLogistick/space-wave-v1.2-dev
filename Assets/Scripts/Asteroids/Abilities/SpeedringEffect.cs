@@ -11,7 +11,7 @@ public class SpeedringEffect : AsteroidAbility {
         manager = GameManager.instance;
     }
 
-    public override void Fire() {
+    public override void Fire(ObstacleMovement main) {
         // On Player Collision
         manager.AlterGameSpeedBy(gameSpeedJump);
         manager.AlterScoreBy(scoreIncrease);

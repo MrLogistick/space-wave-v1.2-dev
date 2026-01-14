@@ -178,11 +178,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
   speedError: 2
-  maxSpeed: 50
   maxRotSpeed: 80
   scoreIncrease: 10
   camOffset: 4
   camLeft: -20
+  radius: 2
   explosion: {fileID: 6094843021765626574}
   roidType: 0
   ability: {fileID: 0}
