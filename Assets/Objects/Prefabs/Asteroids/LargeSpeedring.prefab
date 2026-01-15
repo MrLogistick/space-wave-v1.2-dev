@@ -34528,8 +34528,7 @@ GameObject:
   - component: {fileID: 1273605412907627174}
   - component: {fileID: 3048678841552937237}
   - component: {fileID: 1373618074204290035}
-  - component: {fileID: 2083165883468743754}
-  - component: {fileID: 1073193305255595121}
+  - component: {fileID: 4427950008315006687}
   m_Layer: 0
   m_Name: LargeSpeedring
   m_TagString: Untagged
@@ -34642,7 +34641,7 @@ PolygonCollider2D:
       - {x: -2, y: -1.6}
       - {x: -1.9, y: -1.75}
   m_UseDelaunayMesh: 0
---- !u!114 &2083165883468743754
+--- !u!114 &4427950008315006687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34651,33 +34650,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 5954303710576478060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cbb1a5b84d94e94f95b518a598f9f64, type: 3}
+  m_Script: {fileID: 11500000, guid: 4726ddbbf1aed4e4d9f8e8b53a48ed6a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
+  m_EditorClassIdentifier: Assembly-CSharp::Speedring
+  maxSpeedOffset: -10
   speedError: 2
-  maxRotSpeed: 40
-  scoreIncrease: -100
-  camOffset: 4
-  camLeft: -20
-  radius: 7
-  explosion: {fileID: 6233546986267221259}
+  speed: 0
+  overrideSpeed: 0
+  maxRotSpeed: 60
+  roidStrength: 8
+  scoreOnDestroy: -90
+  particles:
+  - {fileID: 920544409513938993}
+  - {fileID: 6427613335162578101}
+  - {fileID: 7552409541782913471}
+  - {fileID: 7722190164439312028}
+  - {fileID: 8137722014215131984}
+  - {fileID: 1196403036814850675}
+  - {fileID: 1944886285661923057}
+  - {fileID: 3210334630261203741}
+  colliders:
+  - {fileID: 1373618074204290035}
+  renderers:
+  - {fileID: 1683233146533213870}
+  - {fileID: 1112403823268639390}
+  - {fileID: 578108861488677337}
+  - {fileID: 3418485723758928188}
+  - {fileID: 8276522020359809100}
+  - {fileID: 1660933615019745440}
+  - {fileID: 7328499004180158274}
+  - {fileID: 5106475759925993197}
+  pool: {fileID: 0}
+  camLeft: 0
+  camOffset: 3
+  manager: {fileID: 0}
   roidType: 7
-  ability: {fileID: 1073193305255595121}
---- !u!114 &1073193305255595121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5954303710576478060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375b3e774f9eb0d4cae73d65e0a7f59f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpeedringEffect
   gameSpeedJump: 5.4
   scoreIncrease: 600
-  effect: {fileID: 7504338917296795733}
+  passEffect: {fileID: 7504338917296795733}
 --- !u!1 &6483899415999830618
 GameObject:
   m_ObjectHideFlags: 0

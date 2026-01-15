@@ -5198,9 +5198,8 @@ GameObject:
   - component: {fileID: 1273605412907627174}
   - component: {fileID: 5899407681830751671}
   - component: {fileID: 5831265364837723164}
-  - component: {fileID: 2083165883468743754}
   - component: {fileID: 5290837220115155317}
-  - component: {fileID: 7019203832896542781}
+  - component: {fileID: 4940914154763803195}
   m_Layer: 0
   m_Name: MediumSmallBombroid
   m_TagString: Untagged
@@ -5346,29 +5345,6 @@ PolygonCollider2D:
       - {x: 0.2974949, y: 0.80692446}
       - {x: -0.13925743, y: 0.8028991}
   m_UseDelaunayMesh: 0
---- !u!114 &2083165883468743754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5954303710576478060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cbb1a5b84d94e94f95b518a598f9f64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
-  speedError: 2
-  speed: 0
-  maxRotSpeed: 100
-  scoreIncrease: 20
-  camOffset: 3
-  camLeft: -20
-  radius: 1.25
-  overrideSpeed: 0
-  explosion: {fileID: 2992111335371932376}
-  roidType: 3
-  ability: {fileID: 7019203832896542781}
 --- !u!50 &5290837220115155317
 Rigidbody2D:
   serializedVersion: 5
@@ -5396,7 +5372,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &7019203832896542781
+--- !u!114 &4940914154763803195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5405,16 +5381,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 5954303710576478060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4309b24fcdb3bc94ca656f5649a443a8, type: 3}
+  m_Script: {fileID: 11500000, guid: a55945d91a6ab7e478ae48386f82eed5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BombroidEffect
+  m_EditorClassIdentifier: Assembly-CSharp::Bombroid
+  maxSpeedOffset: 10
+  speedError: 2
+  speed: 0
+  overrideSpeed: 0
+  maxRotSpeed: 180
+  roidStrength: 3
+  scoreOnDestroy: 20
+  particles:
+  - {fileID: 2992111335371932376}
+  - {fileID: 62785362719600765}
+  colliders:
+  - {fileID: 5831265364837723164}
+  - {fileID: 6927150857378823981}
+  renderers:
+  - {fileID: 5899407681830751671}
+  - {fileID: 7558041283444483914}
+  - {fileID: 8197045869821850066}
+  pool: {fileID: 0}
+  camOffset: 1.25
+  manager: {fileID: 0}
+  roidType: 3
   explosionDelay: 0.4
-  lethalExplosion: {fileID: 62785362719600765}
-  trigger: {fileID: 6927150857378823981}
   ticker: {fileID: 2155161332469133489}
-  tickerObj: {fileID: 290361647188575298}
-  active: 1
-  triggerRadius: 3.5
+  trigger: {fileID: 6927150857378823981}
 --- !u!1001 &2340158082286889397
 PrefabInstance:
   m_ObjectHideFlags: 0

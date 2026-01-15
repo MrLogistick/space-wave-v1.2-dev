@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 6, y: -6}
   m_SizeDelta: {x: 18, y: 27}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &7055467498815228499
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -62,4 +62,5 @@ MonoBehaviour:
   fontSize: 3
   centred: 0
   flash: 0
+  wrapping: 0
   visible: 1

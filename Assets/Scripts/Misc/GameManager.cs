@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour {
     [SerializeField] float maxSpeed;
     [SerializeField] float returnRate;
 
-    [SerializeField] float totalGain;
     [SerializeField] float gainTime;
     [SerializeField] float midGame;
 
@@ -84,7 +83,7 @@ public class GameManager : MonoBehaviour {
                 desiredSpeed = gameSpeed;
             }
             else {
-                desiredSpeed = maxSpeed - totalGain * (1f - Mathf.Exp(-(gameSpeed - midGame) / gainTime));
+                desiredSpeed = maxSpeed - (maxSpeed - midGame) * (1f - Mathf.Exp(-(gameSpeed - midGame) / gainTime));
             }
 
             if (rawSpeed > desiredSpeed) {

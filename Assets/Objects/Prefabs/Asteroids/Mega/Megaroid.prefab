@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 5899407681830751671}
   - component: {fileID: 5831265364837723164}
   - component: {fileID: -227270841781167666}
-  - component: {fileID: 2083165883468743754}
-  - component: {fileID: 9098842980131647369}
+  - component: {fileID: 8021632815136000160}
   m_Layer: 0
   m_Name: Megaroid
   m_TagString: Untagged
@@ -234,7 +233,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &2083165883468743754
+--- !u!114 &8021632815136000160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,33 +242,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 5954303710576478060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cbb1a5b84d94e94f95b518a598f9f64, type: 3}
+  m_Script: {fileID: 11500000, guid: 7971bb70e819dd140be930acb25bf0d5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
-  speedError: 0
+  m_EditorClassIdentifier: Assembly-CSharp::Megaroid
+  maxSpeedOffset: 10
+  speedError: 2
   speed: 0
-  maxRotSpeed: 20
-  scoreIncrease: 20
-  camOffset: 8.5
-  camLeft: -20
-  radius: 8
   overrideSpeed: 0
-  explosion: {fileID: 1366310278349766616}
+  maxRotSpeed: 60
+  overrideRotation: 0
+  roidStrength: 10
+  scoreOnDestroy: 25
+  particles:
+  - {fileID: 1366310278349766616}
+  colliders:
+  - {fileID: 5831265364837723164}
+  renderers:
+  - {fileID: 5899407681830751671}
+  pool: {fileID: 0}
+  camLeft: 0
+  camOffset: 10
+  manager: {fileID: 0}
   roidType: 1
-  ability: {fileID: 9098842980131647369}
---- !u!114 &9098842980131647369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5954303710576478060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f3c28b4841fafe4c87e33134fc762d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaroidEffect
   maxHits: 2
+  radius: 8
   spawnVariability: {x: 3, y: 6}
   hitEffect: {fileID: 6929234772927140965}
 --- !u!1001 &1948352184252568757

@@ -11,7 +11,7 @@ public class PlayerCollisions : MonoBehaviour {
 
         // If player touches a weapon without SafeForPlayer
         if (other.GetComponent<SafeForPlayer>()) return;
-        if (!other.GetComponent<ObstacleMovement>()) {
+        if (!other.GetComponent<AsteroidBehaviour>()) {
 
             if (!other.CompareTag("Weapon")) return;
 
@@ -19,13 +19,13 @@ public class PlayerCollisions : MonoBehaviour {
                 controller.Die("ASBroid", true);
             }
             
-            var parent = other.GetComponentInParent<ObstacleMovement>();
+            var parent = other.GetComponentInParent<AsteroidBehaviour>();
 
             switch (parent.roidType) {
-                case ObstacleMovement.RoidType.Bombroid:
+                case AsteroidBehaviour.RoidType.Bombroid:
                     controller.Die("Bombroid", true);
                     break;
-                case ObstacleMovement.RoidType.Shiproid:
+                case AsteroidBehaviour.RoidType.Shiproid:
                     controller.Die("ShipwreckBullet", true);
                     break;
             }
@@ -34,30 +34,27 @@ public class PlayerCollisions : MonoBehaviour {
         }
 
         // Asteroid Collisions
-        var obj = other.GetComponent<ObstacleMovement>();
+        var obj = other.GetComponent<AsteroidBehaviour>();
         switch (obj.roidType) {
-            case ObstacleMovement.RoidType.Asteroid:
-            case ObstacleMovement.RoidType.Asbroid:
-            case ObstacleMovement.RoidType.Bombroid:
+            case AsteroidBehaviour.RoidType.Asteroid:
+            case AsteroidBehaviour.RoidType.Asbroid:
+            case AsteroidBehaviour.RoidType.Bombroid:
                 obj.Disable(true);
                 controller.Die("Asteroid", true);
                 break;
-            case ObstacleMovement.RoidType.Shiproid:
+            case AsteroidBehaviour.RoidType.Shiproid:
                 obj.Disable(true);
                 controller.Die("Shipwreck", true);
                 break;
-            case ObstacleMovement.RoidType.Megaroid:
+            case AsteroidBehaviour.RoidType.Megaroid:
                 controller.Die("Megaroid", true);
                 break;
-            case ObstacleMovement.RoidType.Tunnelroid:
+            case AsteroidBehaviour.RoidType.Tunnelroid:
                 controller.Die("Tunnelroid", true);
                 break;
-            case ObstacleMovement.RoidType.Pickup:
-                obj.Disable(true);
+            case AsteroidBehaviour.RoidType.Pickup:
                 controller.AlterAbility();
-                break;
-            case ObstacleMovement.RoidType.Speedring:
-                obj.FireAbility();
+                obj.Disable(true);
                 break;
         }
     }

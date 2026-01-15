@@ -29,14 +29,13 @@ public class AsteroidSpawner : MonoBehaviour {
     [Space]
     [SerializeField] float specialRoidDelay;
     bool specialRoidsActive = false;
-    [HideInInspector] public bool megaroidActive;
+    int megaroidUsage;
 
     [Header("Fields Extended")]
     [SerializeField] Animator fieldWarningVisual;
     [SerializeField] float fieldWarningTime;
     [Space]
     [SerializeField] Vector2 fieldLife;
-    int fieldsEndured;
 
     [Header("Borders")]
     [SerializeField] float generalBorder;
@@ -77,6 +76,7 @@ public class AsteroidSpawner : MonoBehaviour {
             rate += Random.Range(-rateError.x, rateError.x);
             yield return new WaitForSeconds(rate);
 
+            megaroidUsage -= 1;
             for (int i = 0; i < currentDensity; i++) {
                 float total = generalWeight + specialWeight + megaWeight + pickupWeight + speedringWeight;
                 float roll;
@@ -98,11 +98,11 @@ public class AsteroidSpawner : MonoBehaviour {
                 }
                 else if (roll < generalWeight + specialWeight + megaWeight) {
                     // Megaroids (Megaroid, Tunnelroid)
-                    if (megaroidActive) {
+                    if (megaroidUsage > 0) {
                         InstantiateAsteroid(generalRoids);
                     }
                     else {
-                        megaroidActive = true;
+                        megaroidUsage = 2;
                         InstantiateAsteroid(megaRoids);                        
                     }
 
@@ -124,11 +124,11 @@ public class AsteroidSpawner : MonoBehaviour {
 
     public void InstantiateAsteroid(GameObject[] list) {
         if (list.Length < 1) return;
-        var i = Random.Range(0, list.Length);
-        var roid = Instantiate(list[i], transform);
-        var roidScript = roid.GetComponent<ObstacleMovement>();
+        int i = Random.Range(0, list.Length);
+        GameObject roid = list[i].GetComponent<ObjectPool>().GetFromPool();
+        var roidScript = roid.GetComponent<AsteroidBehaviour>();
 
-        roidScript.camLeft = cam.transform.position.x - cam.orthographicSize * cam.aspect;
+        roidScript.pool = list[i].GetComponent<ObjectPool>();
         var camRight = cam.transform.position.x + cam.orthographicSize * cam.aspect;
 
         float roidPos;
@@ -136,10 +136,10 @@ public class AsteroidSpawner : MonoBehaviour {
             default:
                 roidPos = Random.Range(-generalBorder, generalBorder);
                 break;
-            case ObstacleMovement.RoidType.Megaroid:
+            case AsteroidBehaviour.RoidType.Megaroid:
                 roidPos = megaroidBorder * (Random.value < 0.5f ? -1 : 1);
                 break;
-            case ObstacleMovement.RoidType.Tunnelroid:
+            case AsteroidBehaviour.RoidType.Tunnelroid:
                 roidPos = 0f;
                 break;
         }
@@ -172,7 +172,6 @@ public class AsteroidSpawner : MonoBehaviour {
             yield return new WaitForSeconds(Random.Range(fieldLife.x, fieldLife.y));
             if (manager.postGame) yield break;
 
-            fieldsEndured++;
             currentDensity = density.x;
 
             InstantiateAsteroid(speedrings);

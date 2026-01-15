@@ -30,7 +30,6 @@ public class StandardShockwave : MonoBehaviour
             Destroy(gameObject);
         }
         else {
-
             if (manager.postGame) {
                 slowDown *= manager.endMultiplier;
                 time = Time.deltaTime * slowDown;
@@ -38,6 +37,10 @@ public class StandardShockwave : MonoBehaviour
             }
             else {
                 time = Time.deltaTime;
+            }
+
+            if (!GetComponent<SpriteRenderer>().enabled) {
+                Destroy(gameObject);
             }
 
             lifetimeElapsed += time;

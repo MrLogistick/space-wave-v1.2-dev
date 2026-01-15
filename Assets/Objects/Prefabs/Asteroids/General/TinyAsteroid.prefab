@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1273605412907627174}
   - component: {fileID: 5899407681830751671}
   - component: {fileID: 4293679603117153133}
-  - component: {fileID: 2083165883468743754}
   - component: {fileID: -2998364784671251920}
+  - component: {fileID: 165521923608605757}
   m_Layer: 0
   m_Name: TinyAsteroid
   m_TagString: Untagged
@@ -130,27 +130,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &2083165883468743754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5954303710576478060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cbb1a5b84d94e94f95b518a598f9f64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
-  speedError: 2
-  maxRotSpeed: 180
-  scoreIncrease: 10
-  camOffset: 1
-  camLeft: -20
-  radius: 0.5
-  explosion: {fileID: 4824674484194168273}
-  roidType: 0
-  ability: {fileID: 0}
 --- !u!50 &-2998364784671251920
 Rigidbody2D:
   serializedVersion: 5
@@ -178,6 +157,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &165521923608605757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954303710576478060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16fb6966aa3e3e4eb8aaa03e69654f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::General
+  maxSpeedOffset: 10
+  speedError: 2
+  speed: 0
+  overrideSpeed: 0
+  maxRotSpeed: 180
+  roidStrength: 1
+  scoreOnDestroy: 10
+  particles:
+  - {fileID: 4824674484194168273}
+  colliders:
+  - {fileID: 4293679603117153133}
+  renderers:
+  - {fileID: 5899407681830751671}
+  pool: {fileID: 0}
+  camOffset: 0.5
+  manager: {fileID: 0}
+  roidType: 0
 --- !u!1001 &5407516833990534844
 PrefabInstance:
   m_ObjectHideFlags: 0

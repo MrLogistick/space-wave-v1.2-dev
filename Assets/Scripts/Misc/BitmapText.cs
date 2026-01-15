@@ -162,10 +162,10 @@ public class BitmapText : MonoBehaviour {
             var obj = new GameObject(c.ToString(), typeof(RectTransform), typeof(CanvasRenderer));
             var childrt = obj.GetComponent<RectTransform>();
 
-            float pos = x - (centred ? 0f : rt.rect.xMax);
+            var xPos = x + sprite.rect.width * fontSize / 2f - (centred ? 0f : rt.rect.width / 2f);
 
             obj.transform.SetParent(transform, false);
-            childrt.anchoredPosition = new Vector2(pos + sprite.rect.width * fontSize / 2f, currentLine * -sprite.rect.height * fontSize);
+            childrt.anchoredPosition = new Vector2(xPos, currentLine * -sprite.rect.height * fontSize);
             childrt.sizeDelta = new Vector2(sprite.rect.width, sprite.rect.height) * fontSize;
 
             var image = obj.AddComponent<Image>();

@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2200571303241464026}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: -1.1875, y: 1.1563, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1273605412907627174}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!1 &5954303710576478060
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,9 +42,7 @@ GameObject:
   - component: {fileID: 1273605412907627174}
   - component: {fileID: 5899407681830751671}
   - component: {fileID: 5831265364837723164}
-  - component: {fileID: 2083165883468743754}
   - component: {fileID: 8570268532882055762}
-  - component: {fileID: 6343181133009297902}
   m_Layer: 0
   m_Name: MediumAsbroid
   m_TagString: Untagged
@@ -192,29 +190,6 @@ PolygonCollider2D:
       - {x: 0.5606823, y: 1.2029346}
       - {x: 0.10779953, y: 0.9124955}
   m_UseDelaunayMesh: 0
---- !u!114 &2083165883468743754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5954303710576478060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cbb1a5b84d94e94f95b518a598f9f64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
-  speedError: 2
-  speed: 0
-  maxRotSpeed: 40
-  scoreIncrease: 20
-  camOffset: 3
-  camLeft: -20
-  radius: 1.5
-  overrideSpeed: 0
-  explosion: {fileID: 837674680536996795}
-  roidType: 4
-  ability: {fileID: 6343181133009297902}
 --- !u!50 &8570268532882055762
 Rigidbody2D:
   serializedVersion: 5
@@ -242,21 +217,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &6343181133009297902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5954303710576478060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5eca5a6fc77364478c72849727d61e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ASBroidEffect
-  shotRate: 1.2
-  bullet: {fileID: 3896608378518660786, guid: 016275a1d43ce7949898be774290c862, type: 3}
-  shotPoint: {fileID: 196344016703940720}
 --- !u!1001 &171119913581457622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -329,10 +289,5 @@ PrefabInstance:
 --- !u!4 &25208018755505317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 145942750958550131, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}
-  m_PrefabInstance: {fileID: 171119913581457622}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &837674680536996795 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 720562783111588717, guid: 29b0f3a40779fef47aaf0e93605cb2b3, type: 3}
   m_PrefabInstance: {fileID: 171119913581457622}
   m_PrefabAsset: {fileID: 0}

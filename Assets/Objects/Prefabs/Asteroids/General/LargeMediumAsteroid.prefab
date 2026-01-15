@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1273605412907627174}
   - component: {fileID: 5899407681830751671}
   - component: {fileID: 5831265364837723164}
-  - component: {fileID: 2083165883468743754}
   - component: {fileID: 4522909805550088927}
+  - component: {fileID: 2689400366134662869}
   m_Layer: 0
   m_Name: LargeMediumAsteroid
   m_TagString: Untagged
@@ -165,27 +165,6 @@ PolygonCollider2D:
       - {x: 0.5222206, y: 1.0837964}
       - {x: 0.11024666, y: 1.2239066}
   m_UseDelaunayMesh: 0
---- !u!114 &2083165883468743754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5954303710576478060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cbb1a5b84d94e94f95b518a598f9f64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleMovement
-  speedError: 2
-  maxRotSpeed: 80
-  scoreIncrease: 10
-  camOffset: 4
-  camLeft: -20
-  radius: 2
-  explosion: {fileID: 6094843021765626574}
-  roidType: 0
-  ability: {fileID: 0}
 --- !u!50 &4522909805550088927
 Rigidbody2D:
   serializedVersion: 5
@@ -213,6 +192,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &2689400366134662869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954303710576478060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16fb6966aa3e3e4eb8aaa03e69654f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::General
+  maxSpeedOffset: 10
+  speedError: 2
+  speed: 0
+  overrideSpeed: 0
+  maxRotSpeed: 180
+  roidStrength: 5
+  scoreOnDestroy: 10
+  particles:
+  - {fileID: 6094843021765626574}
+  colliders:
+  - {fileID: 5831265364837723164}
+  renderers:
+  - {fileID: 5899407681830751671}
+  pool: {fileID: 0}
+  camOffset: 2
+  manager: {fileID: 0}
+  roidType: 0
 --- !u!1001 &6731420635146248611
 PrefabInstance:
   m_ObjectHideFlags: 0
