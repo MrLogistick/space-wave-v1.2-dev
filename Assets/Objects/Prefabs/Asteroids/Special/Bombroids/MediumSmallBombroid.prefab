@@ -5389,11 +5389,11 @@ MonoBehaviour:
   speed: 0
   overrideSpeed: 0
   maxRotSpeed: 180
+  overrideRotation: 0
   roidStrength: 3
   scoreOnDestroy: 20
   particles:
   - {fileID: 2992111335371932376}
-  - {fileID: 62785362719600765}
   colliders:
   - {fileID: 5831265364837723164}
   - {fileID: 6927150857378823981}
@@ -5402,10 +5402,12 @@ MonoBehaviour:
   - {fileID: 7558041283444483914}
   - {fileID: 8197045869821850066}
   pool: {fileID: 0}
+  camLeft: 0
   camOffset: 1.25
   manager: {fileID: 0}
   roidType: 3
-  explosionDelay: 0.4
+  explosionDelay: 0.5
+  explosion: {fileID: 62785362719600765}
   ticker: {fileID: 2155161332469133489}
   trigger: {fileID: 6927150857378823981}
 --- !u!1001 &2340158082286889397

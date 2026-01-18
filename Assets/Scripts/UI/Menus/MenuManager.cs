@@ -9,7 +9,8 @@ public class MenuManager : MonoBehaviour {
     ShipsMenu shipsScript;
     OptionsMenu optionsScript;
 
-    public ShipType currentShip = ShipType.Athena;
+    int selectedShip;
+    public ShipType currentShip;
     ShipType[] allShips;
     public enum ShipType {
         Athena,
@@ -31,19 +32,27 @@ public class MenuManager : MonoBehaviour {
     }
 
     void Start() {
+        Begin();
+    }
+
+    public void Begin() {
         titleScript = titleScreen.GetComponent<TitleScreen>();
         shipsScript = shipsMenu.GetComponent<ShipsMenu>();
         optionsScript = optionsMenu.GetComponent<OptionsMenu>();
 
         PlayerPrefs.SetInt("Athena_Unlocked", 2);
-        currentShip = (ShipType)PlayerPrefs.GetInt("PreviousShip", 0);
 
         ShipsMenuExclamation();
         OptionsMenuExclamation();
-        TitleScreenExclamation();
     }
 
     void Update() {
+        TitleScreenExclamation();
+
+        selectedShip = PlayerPrefs.GetInt("CurrentShip", 0);
+        currentShip = (ShipType)PlayerPrefs.GetInt("CurrentShip", 0);
+        persistantObject.GetComponent<PersistantObject>().selectedShip = selectedShip;
+
         var music = persistantObject.GetComponent<AudioSource>();
         music.volume = (float)PlayerPrefs.GetInt("Music", 8) / 10;
     }
@@ -61,13 +70,6 @@ public class MenuManager : MonoBehaviour {
         else {
             titleScript.buttons[1].gameObject.SetActive(false);
         }
-
-        // foreach (var button in shipsScript.buttons) {
-        //     if (button.newThing) {
-        //         titleScript.buttons[2].newThing = true;
-        //         return;
-        //     }
-        // }
         
         titleScript.buttons[2].newThing = shipsScript.buttons.Any(b => b.newThing);
         titleScript.buttons[3].newThing = optionsScript.buttons[6].newThing;
@@ -81,11 +83,12 @@ public class MenuManager : MonoBehaviour {
                 continue;
             }
 
+            shipsScript.buttons[(int)ship].gameObject.SetActive(true);
+
             if (PlayerPrefs.GetInt($"{ship}_Unlocked", 0) == 2)
                 continue;
 
             PlayerPrefs.SetInt($"{ship}_Unlocked", 2);
-            shipsScript.buttons[(int)ship].gameObject.SetActive(true);
             shipsScript.buttons[(int)ship].newThing = true;
         }
     }

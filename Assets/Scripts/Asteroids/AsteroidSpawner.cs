@@ -174,6 +174,7 @@ public class AsteroidSpawner : MonoBehaviour {
 
             currentDensity = density.x;
 
+            megaroidUsage = 2;
             InstantiateAsteroid(speedrings);
             fieldWarningVisual.SetTrigger("Switch");
         }

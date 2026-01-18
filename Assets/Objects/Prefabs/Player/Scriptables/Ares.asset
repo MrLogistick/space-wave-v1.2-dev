@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea758e021e896a5419b48c9fd505eaf5, type: 3}
+  m_Name: Ares
+  m_EditorClassIdentifier: Assembly-CSharp::ShipData
+  moveSpeed: 0.25
+  turnSpeed: 450
+  acceleration: 1.2
+  ship: {fileID: 4959970065505324431, guid: 726062bb54ade0445ae25a28348cd7f0, type: 3}

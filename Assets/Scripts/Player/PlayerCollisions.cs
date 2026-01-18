@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour {
@@ -8,26 +9,17 @@ public class PlayerCollisions : MonoBehaviour {
     }
 
     void HandleCollision(Transform other) {
-
         // If player touches a weapon without SafeForPlayer
         if (other.GetComponent<SafeForPlayer>()) return;
+
         if (!other.GetComponent<AsteroidBehaviour>()) {
-
             if (!other.CompareTag("Weapon")) return;
-
+            
             if (other.GetComponent<PlasmaShotBehaviour>()) {
                 controller.Die("ASBroid", true);
             }
-            
-            var parent = other.GetComponentInParent<AsteroidBehaviour>();
-
-            switch (parent.roidType) {
-                case AsteroidBehaviour.RoidType.Bombroid:
-                    controller.Die("Bombroid", true);
-                    break;
-                case AsteroidBehaviour.RoidType.Shiproid:
-                    controller.Die("ShipwreckBullet", true);
-                    break;
+            if (other.GetComponentInParent<Bombroid>()) {
+                controller.Die("Bombroid", true);
             }
 
             return;

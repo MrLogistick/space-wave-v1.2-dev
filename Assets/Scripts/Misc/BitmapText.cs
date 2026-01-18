@@ -72,7 +72,7 @@ public class BitmapText : MonoBehaviour {
                         letterStyle[']'] = s;
                         break;
                     case "apostrophe":
-                        letterStyle['"'] = s;
+                        letterStyle['\''] = s;
                         break;
                 }
             }
@@ -84,6 +84,7 @@ public class BitmapText : MonoBehaviour {
     }
 
     void Update() {
+        // If changes > 0, DrawText();
         changes = 0;
 
         if (previousText != text) { previousText = text; changes++; }
@@ -107,71 +108,121 @@ public class BitmapText : MonoBehaviour {
         }
     }
 
-    float Centre(float value) {
-        return centred ? value / -2f : 0f;
-    }
-
     void DrawText(Dictionary<char, Sprite> letterStyle) {
+        // Getting total width and word sizes
         float totalWidth = 0f;
+        int currentWord = 0;
+        List<float> words = new List<float> { 0 };
+
         foreach (char raw in text) {
             char c = char.ToUpper(raw);
             if (!letterStyle.TryGetValue(c, out Sprite sprite)) {
-                if (c == ' ') totalWidth += wordSpacing * fontSize;
+                if (c == ' ') {
+                    // On space, create new word and add to width
+                    totalWidth += wordSpacing * fontSize;
+                    currentWord++;
+                    words.Add(0);
+                }
                 continue;
             }
 
+            // On regular letter, add to wordsize and totalwidth
             totalWidth += (sprite.rect.width + ThinLetters(c)) * fontSize;
+            words[currentWord] += (sprite.rect.width + ThinLetters(c)) * fontSize;
         }
 
-        List<float> lineLength = new List<float>();
-        if (totalWidth > rt.rect.width && wrapping) {
-            int count = Mathf.FloorToInt(totalWidth / rt.rect.width);
-            for (int i = 0; i < count; i++) {
-                lineLength.Add(rt.rect.width);
-            }
+        // Getting line lengths depending on wrapping true/false
+        // List<float> lineLength = new List<float>();
+        // if (totalWidth > rt.rect.width && wrapping) {
+        //     int count = Mathf.FloorToInt(totalWidth / rt.rect.width);
+        //     for (int i = 0; i < count; i++) {
+        //         // For the lines largerthan rt.rect.width
+        //         lineLength.Add(rt.rect.width);
+        //     }
             
-            float remainder = totalWidth % rt.rect.width;
-            if (remainder > 0f) {
-                lineLength.Add(remainder);
-            }
-        }
-        else {
-            lineLength.Add(totalWidth);
-        }
+        //     // for the line smaller than rt.rect.width
+        //     float remainder = totalWidth % rt.rect.width;
+        //     if (remainder > 0f) {
+        //         lineLength.Add(remainder);
+        //     }
+        // }
+        // else {
+        //     // One line only -- wrapping = false
+        //     lineLength.Add(totalWidth);
+        // }
+        
+        var maxWidth = rt.rect.width;
+        List<float> lineWidths = new List<float>() { 0 };
 
+        // Draw Text
+        currentWord = 0;
         int currentLine = 0;
-        float x = centred ? lineLength[currentLine] / -2f : 0f;
+
+        float x = 0f;
+        float lineStart = 0f;
+
+        bool atWordStart = true;
+
         foreach (char raw in text) {
             char c = char.ToUpper(raw);
             Sprite sprite;
 
             switch (c) {
                 case ' ':
+                    // On space, next word
                     x += wordSpacing * fontSize;
+                    lineWidths[currentLine] = Mathf.Max(lineWidths[currentLine], x - lineStart);
+                    currentWord++;
+                    if (currentWord >= words.Count) currentWord = words.Count - 1;
+                    
+                    atWordStart = true;
                     continue;
                 default:
+                    // Every other letter
                     if (!letterStyle.TryGetValue(c, out sprite)) continue;
                     break;
             }
 
-            if (x >= (centred ? lineLength[currentLine] / 2f : lineLength[currentLine])) {
-                currentLine++;
-                x = centred ? lineLength[currentLine] / -2f : 0f;
+            // Wrapping -- if this upcoming word exceeds lineLength, move the word to the next line.
+            if (atWordStart) {
+                var usedWidth = x - lineStart;
+                if (wrapping && usedWidth + words[currentWord] >= maxWidth) {
+                    currentLine++;
+                    lineWidths.Add(0f);
+                    x = 0f;
+                    lineStart = 0f;
+                }
+
+                atWordStart = false;
             }
 
+            // Sprite creation
             var obj = new GameObject(c.ToString(), typeof(RectTransform), typeof(CanvasRenderer));
             var childrt = obj.GetComponent<RectTransform>();
 
-            var xPos = x + sprite.rect.width * fontSize / 2f - (centred ? 0f : rt.rect.width / 2f);
-
+            // Positioning and size
             obj.transform.SetParent(transform, false);
+
+            var xPos = x + sprite.rect.width * fontSize / 2f - (centred ? 0f : rt.rect.width / 2f);
             childrt.anchoredPosition = new Vector2(xPos, currentLine * -sprite.rect.height * fontSize);
+
             childrt.sizeDelta = new Vector2(sprite.rect.width, sprite.rect.height) * fontSize;
 
+            // Imaging
             var image = obj.AddComponent<Image>();
             image.sprite = sprite;
 
             x += (sprite.rect.width + ThinLetters(c)) * fontSize;
+            lineWidths[currentLine] = Mathf.Max(lineWidths[currentLine], x - lineStart);
+        }
+
+        if (centred) {
+            for (int i  = 0; i < transform.childCount; i++) {
+                var child = transform.GetChild(i) as RectTransform;
+                int line = Mathf.RoundToInt(-child.anchoredPosition.y / (child.sizeDelta.y));
+                float offset = lineWidths[line] / 2f;
+                child.anchoredPosition += Vector2.left * offset;
+            }
         }
     }
 
@@ -184,7 +235,7 @@ public class BitmapText : MonoBehaviour {
             case ',':
             case '.':
             case '!':
-            case '"':
+            case '\'':
                 xOffset = -2;
                 break;
         }

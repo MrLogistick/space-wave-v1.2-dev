@@ -45,15 +45,15 @@ public class ShipsMenu : MonoBehaviour {
         if (Keyboard.current.bKey.wasPressedThisFrame) { Back(); }
     }
 
-    public void Athena() { manager.currentShip = MenuManager.ShipType.Athena; }
-    public void Hermes() { manager.currentShip = MenuManager.ShipType.Hermes; }
-    public void Zeus() { manager.currentShip = MenuManager.ShipType.Zeus; }
-    public void Hephaetsus() { manager.currentShip = MenuManager.ShipType.Hephaetsus; }
-    public void Ares() { manager.currentShip = MenuManager.ShipType.Ares; }
-    public void Poseidon() { manager.currentShip = MenuManager.ShipType.Poseidon; }
-    public void Aphrodite() { manager.currentShip = MenuManager.ShipType.Aphrodite; }
-    public void Dionysus() { manager.currentShip = MenuManager.ShipType.Dionysus; }
-    public void Artemis() { manager.currentShip = MenuManager.ShipType.Artemis; }
+    public void Athena() { PlayerPrefs.SetInt("CurrentShip", 0); }
+    public void Hermes() { PlayerPrefs.SetInt("CurrentShip", 1); }
+    public void Zeus() { PlayerPrefs.SetInt("CurrentShip", 2); }
+    public void Hephaetsus() { PlayerPrefs.SetInt("CurrentShip", 3); }
+    public void Ares() { PlayerPrefs.SetInt("CurrentShip", 4); }
+    public void Poseidon() { PlayerPrefs.SetInt("CurrentShip", 5); }
+    public void Aphrodite() { PlayerPrefs.SetInt("CurrentShip", 6); }
+    public void Dionysus() { PlayerPrefs.SetInt("CurrentShip", 7); }
+    public void Artemis() { PlayerPrefs.SetInt("CurrentShip", 8); }
 
     public void Back() {
         buttons[9].Reset();

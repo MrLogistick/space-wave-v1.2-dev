@@ -287,7 +287,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5123,7 +5123,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -9758,7 +9758,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 12
-  m_Sprite: {fileID: -1495209640, guid: 0689b3782d6ad9e4eabab45d65c3a6a1, type: 3}
+  m_Sprite: {fileID: 494605043, guid: 32173c31115403a44864054c9da073af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9915,7 +9915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrefabSetup
   ship: {fileID: 7563886404138979907}
-  ability: {fileID: 7770641618327157874}
+  ability: {fileID: 2458844804161501009}
   trails:
   - {fileID: 5842995205548314465}
   - {fileID: 1883928826681765142}
@@ -14798,7 +14798,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3871540407548171399}
   - component: {fileID: 1562349971998335871}
-  - component: {fileID: 7770641618327157874}
+  - component: {fileID: 2458844804161501009}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -14870,7 +14870,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 13
-  m_Sprite: {fileID: 1624944656, guid: 0689b3782d6ad9e4eabab45d65c3a6a1, type: 3}
+  m_Sprite: {fileID: -51576502, guid: 32173c31115403a44864054c9da073af, type: 3}
   m_Color: {r: 1, g: 0.27450982, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14881,7 +14881,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7770641618327157874
+--- !u!114 &2458844804161501009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14890,18 +14890,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 6839214838725461466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf8edf8cb7a65084c98e5d07086c3b73, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b080f2328aa06743a02b8430b0cfaab, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShipAbility
+  m_EditorClassIdentifier: Assembly-CSharp::Hermes
   activated: 0
-  initialBullets: 0
-  maxBullets: 2
-  overflowScore: 1500
-  bullet: {fileID: 3896608378518660786, guid: 867b412cb5fcd1943a3389616513a0d6, type: 3}
-  shootPoint: {fileID: 6557655664999336324}
-  secondShootPoint: {fileID: 4450510479414893734}
+  ability: {fileID: 3896608378518660786, guid: 867b412cb5fcd1943a3389616513a0d6, type: 3}
+  shootPoint: {fileID: 0}
+  maxCount: 2
+  initialCount: 0
+  currentCount: 0
+  overflowScore: 400
   visual: {fileID: 7058141938582609132, guid: bec80cb8c0b7b45438b1d9be29ce6ca9, type: 3}
-  currentShip: 1
+  fill: {fileID: 0}
+  manager: {fileID: 0}
+  weapon: 0
+  shootPoints:
+  - {fileID: 6557655664999336324}
+  - {fileID: 4450510479414893734}
 --- !u!1 &7616301291359856332
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     ParticleSystem[] trails;
     PolygonCollider2D coll;
 
-    [SerializeField] ShipData data;
+    public ShipData data;
     [SerializeField] bool collisionsEnabled;
 
     [SerializeField] ParticleSystem explosion;

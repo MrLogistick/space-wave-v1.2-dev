@@ -24832,7 +24832,8 @@ MonoBehaviour:
   speed: 0
   overrideSpeed: 0
   maxRotSpeed: 60
-  roidStrength: 7
+  overrideRotation: 0
+  roidStrength: 8
   scoreOnDestroy: -30
   particles:
   - {fileID: 920544409513938993}
@@ -24847,6 +24848,7 @@ MonoBehaviour:
   - {fileID: 578108861488677337}
   - {fileID: 3418485723758928188}
   pool: {fileID: 0}
+  disabled: 0
   camLeft: 0
   camOffset: 2.5
   manager: {fileID: 0}

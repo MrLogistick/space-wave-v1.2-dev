@@ -18,7 +18,10 @@ public abstract class AsteroidBehaviour : MonoBehaviour {
     public Collider2D[] colliders;
     public SpriteRenderer[] renderers;
     public ObjectPool pool;
-    bool disabled;
+    [HideInInspector] public bool disabled;
+
+    Collider2D[] results = new Collider2D[8];
+    ContactFilter2D filter = new ContactFilter2D();
 
     Camera cam;
     [HideInInspector] public float camLeft;
@@ -36,6 +39,11 @@ public abstract class AsteroidBehaviour : MonoBehaviour {
         Shiproid,
         Pickup,
         Speedring
+    }
+
+    protected void Awake() {
+        filter.useTriggers = true;
+        filter = ContactFilter2D.noFilter;
     }
 
     protected void Start() {
@@ -114,13 +122,13 @@ public abstract class AsteroidBehaviour : MonoBehaviour {
             }
         }
         else {
-            pool.ReturnToPool(gameObject);
+            if (!manager.postGame) pool.ReturnToPool(gameObject);        
         }
     }
     protected virtual void OptionalDisable(bool explode) { }
 
     protected void OnParticleSystemStopped() {
-        pool.ReturnToPool(gameObject);        
+        if (!manager.postGame) pool.ReturnToPool(gameObject);        
     }
 
     protected virtual void HandleCollision(Collider2D thisCol, Collider2D otherCol, int index) {
@@ -160,14 +168,16 @@ public abstract class AsteroidBehaviour : MonoBehaviour {
     }
 
     protected void OnTriggerEnter2D(Collider2D other) {
-        foreach (Collider2D col in colliders) {
-            if (col == other) continue;
-            if (!col.isTrigger) continue;
+        foreach (var col in colliders) {
+            int count = col.Overlap(filter, results);
 
-            if (col.IsTouching(other)) {
-                int index = System.Array.IndexOf(colliders, col);
-                HandleCollision(col, other, index);
-                return;
+            for (int i = 0; i < count; i++) {
+                if (results[i] ==  other) {
+                    Collider2D thisCol = col;
+
+                    int index = System.Array.IndexOf(colliders, thisCol);
+                    HandleCollision(thisCol, other, index);
+                }
             }
         }
     }

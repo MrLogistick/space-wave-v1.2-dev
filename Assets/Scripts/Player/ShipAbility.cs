@@ -1,71 +1,76 @@
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ShipAbility : MonoBehaviour
-{
+public abstract class ShipAbility : MonoBehaviour {
     public bool activated;
 
-    [SerializeField] int initialBullets;
-    [SerializeField] int maxBullets;
-    [SerializeField] int overflowScore;
-    int bulletCount;
+    public GameObject ability;
+    public Transform shootPoint;
 
-    [SerializeField] GameObject bullet;
+    public int maxCount;
+    public int initialCount;
+    [HideInInspector] public int currentCount;
 
-    [SerializeField] Transform shootPoint;
-    [SerializeField] Transform secondShootPoint;
-    Transform currentPoint;
+    public int overflowScore;
+    int overflowCount;
 
-    [SerializeField] GameObject visual;
-    Image fill;
+    public GameObject visual;
+    [HideInInspector] public Image fill;
 
-    [SerializeField] ShipType currentShip;
-    enum ShipType {
-        Athena,
-        Hermes,
-        Zeus,
-        Hephaetsus
+    [HideInInspector] public GameManager manager;
+
+    public WeaponType weapon;
+    public enum WeaponType {
+        Shockwave,
+        Shield
     }
 
-    void Start() {
-        bulletCount = initialBullets;
+    protected virtual void Start() {
+        manager = GameManager.instance;
 
-        if (visual) {
-            Transform liveVisual = Instantiate(visual, GameObject.FindGameObjectWithTag("MainCanvas").transform).transform;
-            fill = liveVisual.GetChild(0).GetComponent<Image>();
-        }
+        Transform instance = Instantiate(visual, GameObject.FindGameObjectWithTag("MainCanvas").transform).transform;
+        fill = instance.GetChild(0).GetComponent<Image>();
+
+        currentCount = initialCount;
+
+        OptionalStart();
     }
+    protected virtual void OptionalStart() { }
 
-    void Update() {
-        switch (currentShip) {
-            case ShipType.Athena: // script in weapon
-                currentPoint = shootPoint;
-                break;
-            case ShipType.Hermes: // script in ship
-                currentPoint = (transform.rotation.z >= -45f)
-                    ? secondShootPoint : shootPoint;
-                break;
-        }
+    protected virtual void Update() {
+        fill.fillAmount = currentCount / (float)maxCount;
 
         if (activated) {
             activated = false;
 
-            if (bulletCount <= 0) return;
-            
-            bulletCount--;
-            var instance = Instantiate(bullet, currentPoint.position, bullet.transform.rotation);
-            instance.GetComponent<StandardShockwave>().manager = GameManager.instance;
+            if (currentCount <= 0) return;
+            currentCount--;
+
+            Fire();
         }
 
-        fill.fillAmount = bulletCount / (float)maxBullets;
+        OptionalUpdate();
+    }
+    protected virtual void OptionalUpdate() { }
+
+    protected virtual void Fire() {
+        Instantiate(ability, shootPoint.position, ability.transform.rotation);
     }
 
-    public void ChangeCountBy(int value) {
-        if (bulletCount == maxBullets) {
-            GameManager.instance.AlterScoreBy(overflowScore);
-            return;
-        }
+    public virtual void ChangeCountBy(int value) {
+        if (currentCount >= maxCount) {
+            manager.AlterScoreBy(overflowScore);
+            overflowCount++;
 
-        bulletCount += value;
+            if (overflowCount < 2 && weapon != WeaponType.Shockwave) return;
+
+            if (PlayerPrefs.GetInt("Zeus_Unlocked", 0) == 0) {
+                PlayerPrefs.SetInt("Zeus_Unlocked", 1);
+                manager.newThing = true;
+            }
+        }
+        else {
+            currentCount += value;
+        }
     }
 }

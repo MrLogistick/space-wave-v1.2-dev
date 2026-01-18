@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
     public float endMultiplier;
 
     float gametime;
+    float accumulativeScore = 0;
     public int score { private set; get; }
     public int highscore;
     public int attempts;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour {
     BitmapText pilotText;
 
     [SerializeField] GameObject postGameMenu;
+    [HideInInspector] public bool newThing;
 
     public static GameManager instance {private set; get;}
 
@@ -71,9 +73,14 @@ public class GameManager : MonoBehaviour {
         }
         else {
             gametime += Time.deltaTime;
-            if (gametime >= 1f) {
-                score += (int)rawSpeed / 10;
+            if (gametime >= 0.1f) {
+                accumulativeScore += rawSpeed / 100;
                 gametime = 0;
+            }
+
+            if (accumulativeScore >= 1f) {
+                accumulativeScore = 0f;
+                score += 1;
             }
 
             gameSpeed += Time.deltaTime * speedIncrease;
@@ -83,7 +90,12 @@ public class GameManager : MonoBehaviour {
                 desiredSpeed = gameSpeed;
             }
             else {
-                desiredSpeed = maxSpeed - (maxSpeed - midGame) * (1f - Mathf.Exp(-(gameSpeed - midGame) / gainTime));
+                desiredSpeed = maxSpeed - (maxSpeed - midGame) * Mathf.Exp(-(gameSpeed - midGame) / gainTime);
+
+                if (PlayerPrefs.GetInt("Hermes_Unlocked", 0) == 0) {
+                    PlayerPrefs.SetInt("Hermes_Unlocked", 1);
+                    newThing = true;
+                }
             }
 
             if (rawSpeed > desiredSpeed) {

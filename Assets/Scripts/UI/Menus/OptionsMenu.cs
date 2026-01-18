@@ -127,6 +127,8 @@ public class OptionsMenu : MonoBehaviour {
             Tutorial(2);
             StaticStart(1);
             TerminateCompanion(1);
+            
+            manager.Begin();
         }
         else {
             buttons[3].exclamation.SetActive(true);

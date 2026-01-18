@@ -244,7 +244,7 @@ TextureImporter:
         width: 4
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -253,6 +253,28 @@ TextureImporter:
       bones: []
       spriteID: 9d2649a493bbbaa498eab7c827672d8b
       internalID: -1096184909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4Bullets
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1
+        width: 19
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9352d8ad9584d64c94dcc056995d1c7
+      internalID: -1962867202
       vertices: []
       indices: 
       edges: []
@@ -273,6 +295,7 @@ TextureImporter:
     nameFileIdTable:
       10bullets: 1181831971
       2bullets: 187590677
+      4Bullets: -1962867202
       5bullets: -8085671701296843257
       Bullet: -1096184909
       BulletMeters_1: 2204178991415934328

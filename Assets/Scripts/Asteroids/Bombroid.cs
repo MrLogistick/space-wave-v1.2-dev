@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class Bombroid : AsteroidBehaviour {
     [SerializeField] float explosionDelay;
+    [SerializeField] ParticleSystem explosion;
     [SerializeField] Animator ticker;
     [SerializeField] CircleCollider2D trigger;
     float triggerRadius;
     bool softStop;
     bool activated;
-    bool complete;
 
     protected override void OptionalOnEnable() {
         triggerRadius = trigger.radius;
+        trigger.enabled = true;
         softStop = false;
         activated = false;
-        complete = false;
         overrideSpeed = false;
         trigger.gameObject.tag = "Untagged";
     }
@@ -25,43 +25,39 @@ public class Bombroid : AsteroidBehaviour {
             softStop = true;
             StartCoroutine(Delay());
         }
-
-        if (!softStop) {
-            Explode();
+        else if (!otherCol.isTrigger) {
+            if (thisCol.isTrigger) return;
+            softStop = false;
+            trigger.enabled = false;
+            Disable(true);
         }
     }
 
     protected override void OptionalUpdate() {
         ticker.speed *= manager.postGame ? manager.endMultiplier : 1f;
-        var main = particles[1].main;
+        var main = explosion.main;
         main.simulationSpeed *= manager.postGame ? manager.endMultiplier : 1f;
 
-        trigger.enabled = !complete ? true : false;
-
-        if (trigger.gameObject.tag == "Weapon") {
-            float t = particles[1].time / main.duration;
+        if (explosion.isPlaying) {
+            float t = explosion.time / main.duration;
             trigger.radius = Mathf.Lerp(0f, triggerRadius, t);
         }
         else {
             trigger.radius = triggerRadius;
         }
 
-        if (overrideSpeed) speed *= 0.8f * Time.deltaTime;
-
-        if (trigger.enabled == false) {
-            pool.ReturnToPool(gameObject);
-        }
+        if (overrideSpeed) speed = 0f;
     }
 
     IEnumerator Delay() {
         if (activated) yield break;
         activated = true;
+        ticker.SetTrigger("Trigger");
 
         yield return CheckForSeconds(0.2f);
         if (!softStop) yield break;
 
         overrideSpeed = true;
-        ticker.SetTrigger("Trigger");
 
         yield return CheckForSeconds(explosionDelay);
         if (!softStop) yield break;
@@ -70,15 +66,16 @@ public class Bombroid : AsteroidBehaviour {
     }
 
     void Explode() {
-        Disable(true);
         trigger.gameObject.tag = "Weapon";
+        explosion.Play();
         StartCoroutine(DisableTrigger());
+        Disable(true);
     }
 
     IEnumerator DisableTrigger() {
-        var main = particles[1].main;
+        var main = explosion.main;
         yield return new WaitForSeconds(main.duration);
-        complete = true;
+        trigger.enabled = false;
     }
 
     IEnumerator CheckForSeconds(float time) {

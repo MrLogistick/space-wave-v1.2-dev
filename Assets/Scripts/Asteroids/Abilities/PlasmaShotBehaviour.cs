@@ -6,6 +6,8 @@ public class PlasmaShotBehaviour : MonoBehaviour {
     [SerializeField] float lifeTime;
     float time;
 
+    [HideInInspector] public float xSpeed;
+
     IEnumerator Start() {
         yield return new WaitForSeconds(lifeTime);
 
@@ -17,6 +19,6 @@ public class PlasmaShotBehaviour : MonoBehaviour {
         slowDown *= GameManager.instance.postGame ? GameManager.instance.endMultiplier : 1f;
         time = Time.deltaTime * slowDown;
 
-        transform.position += transform.up * speed * time;
+        transform.position += ((transform.up + transform.right).normalized * speed + new Vector3(-xSpeed, 0f, 0f)) * time;
     }
 }

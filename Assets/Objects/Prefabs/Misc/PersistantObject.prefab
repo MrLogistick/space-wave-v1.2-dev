@@ -142,3 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927b0675f87070d4cb8ed4450355fa43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PersistantObject
+  player: {fileID: 1547717198468525889, guid: eddae528ee8a3704488ab79f8003efd6, type: 3}
+  ships:
+  - {fileID: 11400000, guid: f2473a768471ae74f8baecb1edb61472, type: 2}
+  - {fileID: 11400000, guid: 5944a40432de2a24aaea929e70681b74, type: 2}
+  - {fileID: 11400000, guid: e126d0f505cac6b479e590f932b60b35, type: 2}
+  - {fileID: 11400000, guid: db0a67b127a5ba34387668ee77a731be, type: 2}
+  - {fileID: 11400000, guid: 65f6f43c10609d049b9b2220e9b20173, type: 2}
+  selectedShip: 3

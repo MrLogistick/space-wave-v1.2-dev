@@ -4171,6 +4171,7 @@ MonoBehaviour:
   fontSize: 3
   centred: 0
   flash: 0
+  wrapping: 0
   visible: 1
 --- !u!222 &1003630282
 CanvasRenderer:
@@ -8504,6 +8505,7 @@ MonoBehaviour:
   fontSize: 3
   centred: 1
   flash: 0
+  wrapping: 0
   visible: 1
 --- !u!222 &3068409453496426752
 CanvasRenderer:
@@ -8530,6 +8532,7 @@ MonoBehaviour:
   fontSize: 3
   centred: 0
   flash: 0
+  wrapping: 0
   visible: 1
 --- !u!224 &4999604686605448582
 RectTransform:
