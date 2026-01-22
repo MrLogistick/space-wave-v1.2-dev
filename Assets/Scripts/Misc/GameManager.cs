@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] float gainTime;
     [SerializeField] float midGame;
+    public float endGame;
+
+    public bool aiIsSane = true;
 
     public float publicMaxSpeed { private set; get; }
 
@@ -45,6 +48,8 @@ public class GameManager : MonoBehaviour {
         rawSpeed = initialGameSpeed;
         publicMaxSpeed = maxSpeed;
 
+        aiIsSane = PlayerPrefs.GetInt("Sanity", 1) == 1 ? true : false;
+
         scoreText = Instantiate(
             scoreTextPrefab, 
             GameObject.FindGameObjectWithTag("MainCanvas").transform
@@ -66,6 +71,10 @@ public class GameManager : MonoBehaviour {
         pilotText.text = $"Pilot {attempts:000000}";
         
         topSpeed = Mathf.Max(gameSpeed, topSpeed);
+
+        if (topSpeed >= endGame) {
+            aiIsSane = false;
+        }
         
         if (postGame) {
             gameSpeed *= endMultiplier;

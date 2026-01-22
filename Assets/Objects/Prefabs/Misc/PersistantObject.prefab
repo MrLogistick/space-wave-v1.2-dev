@@ -149,4 +149,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e126d0f505cac6b479e590f932b60b35, type: 2}
   - {fileID: 11400000, guid: db0a67b127a5ba34387668ee77a731be, type: 2}
   - {fileID: 11400000, guid: 65f6f43c10609d049b9b2220e9b20173, type: 2}
-  selectedShip: 3
+  selectedShip: 0

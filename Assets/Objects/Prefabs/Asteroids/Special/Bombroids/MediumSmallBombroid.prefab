@@ -5396,12 +5396,12 @@ MonoBehaviour:
   - {fileID: 2992111335371932376}
   colliders:
   - {fileID: 5831265364837723164}
-  - {fileID: 6927150857378823981}
   renderers:
   - {fileID: 5899407681830751671}
   - {fileID: 7558041283444483914}
   - {fileID: 8197045869821850066}
   pool: {fileID: 0}
+  disabled: 0
   camLeft: 0
   camOffset: 1.25
   manager: {fileID: 0}

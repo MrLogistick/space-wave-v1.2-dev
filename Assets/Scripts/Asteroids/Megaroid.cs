@@ -41,12 +41,18 @@ public class Megaroid : AsteroidBehaviour {
             else {
                 otherCol.gameObject.SetActive(false);
             }
+
+            DeathCheck();
         }
 
         if (otherCol.GetComponent<Megaroid>()) {
             hits++;
+            
+            DeathCheck();
         }
+    }
 
+    void DeathCheck() {
         if (hits >= maxHits) {
             Disable(true);
         }

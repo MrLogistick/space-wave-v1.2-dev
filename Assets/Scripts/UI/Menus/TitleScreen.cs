@@ -19,6 +19,7 @@ public class TitleScreen : MonoBehaviour {
         foreach (ButtonParameters bp in buttons) {
             if (bp.selected) {
                 bp.pin.SetActive(true);
+                if (bp != buttons[4]) buttons[4].exclamation.SetActive(false);
             }
             else if (bp.hovered) {
                 bp.pin.SetActive(true);

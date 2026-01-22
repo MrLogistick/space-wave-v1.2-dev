@@ -18,11 +18,12 @@ public class StandardShockwave : MonoBehaviour
     float time;
     float slowDown = 1f;
 
-    [HideInInspector] public GameManager manager;
+    GameManager manager;
 
     void Start() {
         currentSpeed = initialSpeed;
         currentScale = initialSize;
+        manager = GameManager.instance;
     }
 
     void Update() {

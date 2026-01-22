@@ -74,7 +74,7 @@ public class Bombroid : AsteroidBehaviour {
 
     IEnumerator DisableTrigger() {
         var main = explosion.main;
-        yield return new WaitForSeconds(main.duration);
+        yield return new WaitForSeconds(main.duration / main.simulationSpeed);
         trigger.enabled = false;
     }
 

@@ -30,6 +30,10 @@ public class OptionsMenu : MonoBehaviour {
         sfxVol = buttons[1].GetComponentInChildren<BitmapText>();
 
         manager = GetComponentInParent<MenuManager>();
+
+        buttons[2].toggled = PlayerPrefs.GetInt("Tutorial", 1) == 1 ? true : false;
+        buttons[3].toggled = PlayerPrefs.GetInt("Tutorial", 0) == 1 ? true : false;
+        buttons[6].toggled = PlayerPrefs.GetInt("Tutorial", 0) == 1 ? true : false;
     }
 
     void OnEnable() {
@@ -55,6 +59,8 @@ public class OptionsMenu : MonoBehaviour {
             if (bp.selected) {
                 bp.pin.SetActive(true);
                 image.color = selected;
+
+                if (bp != buttons[3]) buttons[3].exclamation.SetActive(false);
             }
             else if (bp.hovered) {
                 bp.pin.SetActive(true);
@@ -80,7 +86,7 @@ public class OptionsMenu : MonoBehaviour {
         if (Keyboard.current.tKey.wasPressedThisFrame) { Tutorial(0); }
         if (Keyboard.current.eKey.wasPressedThisFrame) { EraseData(); }
         if (Keyboard.current.fKey.wasPressedThisFrame) { Fullscreen(0); }
-        if (Keyboard.current.cKey.wasPressedThisFrame) { TerminateCompanion(0); }
+        if (Keyboard.current.cKey.wasPressedThisFrame && buttons[6].isActiveAndEnabled) { TerminateCompanion(0); }
         if (Keyboard.current.bKey.wasPressedThisFrame) { Back(); }
     }
 

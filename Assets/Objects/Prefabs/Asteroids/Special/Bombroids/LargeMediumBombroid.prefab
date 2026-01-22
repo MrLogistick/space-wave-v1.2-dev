@@ -421,12 +421,12 @@ MonoBehaviour:
   - {fileID: 6094843021765626574}
   colliders:
   - {fileID: 5831265364837723164}
-  - {fileID: 4210717529408257317}
   renderers:
   - {fileID: 5899407681830751671}
   - {fileID: 7169192439372865157}
   - {fileID: 1830709820150713726}
   pool: {fileID: 0}
+  disabled: 0
   camLeft: 0
   camOffset: 2
   manager: {fileID: 0}

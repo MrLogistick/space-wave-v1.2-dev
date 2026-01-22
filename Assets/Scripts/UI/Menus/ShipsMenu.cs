@@ -33,16 +33,16 @@ public class ShipsMenu : MonoBehaviour {
             }
         }
 
-        if (Keyboard.current.tKey.wasPressedThisFrame) { Athena(); }
-        if (Keyboard.current.hKey.wasPressedThisFrame) { Hermes(); }
-        if (Keyboard.current.zKey.wasPressedThisFrame) { Zeus(); }
-        if (Keyboard.current.eKey.wasPressedThisFrame) { Hephaetsus(); }
-        if (Keyboard.current.aKey.wasPressedThisFrame) { Ares(); }
-        if (Keyboard.current.pKey.wasPressedThisFrame) { Poseidon(); }
-        if (Keyboard.current.rKey.wasPressedThisFrame) { Aphrodite(); }
-        if (Keyboard.current.dKey.wasPressedThisFrame) { Dionysus(); }
-        if (Keyboard.current.mKey.wasPressedThisFrame) { Artemis(); }
-        if (Keyboard.current.bKey.wasPressedThisFrame) { Back(); }
+        if (Keyboard.current.tKey.wasPressedThisFrame && buttons[0].isActiveAndEnabled) { Athena(); }
+        if (Keyboard.current.hKey.wasPressedThisFrame && buttons[1].isActiveAndEnabled) { Hermes(); }
+        if (Keyboard.current.zKey.wasPressedThisFrame && buttons[2].isActiveAndEnabled) { Zeus(); }
+        if (Keyboard.current.eKey.wasPressedThisFrame && buttons[3].isActiveAndEnabled) { Hephaetsus(); }
+        if (Keyboard.current.aKey.wasPressedThisFrame && buttons[4].isActiveAndEnabled) { Ares(); }
+        if (Keyboard.current.pKey.wasPressedThisFrame && buttons[5].isActiveAndEnabled) { Poseidon(); }
+        if (Keyboard.current.rKey.wasPressedThisFrame && buttons[6].isActiveAndEnabled) { Aphrodite(); }
+        if (Keyboard.current.dKey.wasPressedThisFrame && buttons[7].isActiveAndEnabled) { Dionysus(); }
+        if (Keyboard.current.mKey.wasPressedThisFrame && buttons[8].isActiveAndEnabled) { Artemis(); }
+        if (Keyboard.current.bKey.wasPressedThisFrame && buttons[9].isActiveAndEnabled) { Back(); }
     }
 
     public void Athena() { PlayerPrefs.SetInt("CurrentShip", 0); }
